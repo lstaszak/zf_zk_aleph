@@ -1,0 +1,76 @@
+<?php
+
+class Admin_Model_UserCategory extends AppCms2_Controller_Plugin_TableAbstract
+{
+
+  protected $_name = "user_category";
+  protected $_dependentTables = array(
+    "Admin_Model_ChatUserSender",
+    "Admin_Model_MailUserSender"
+  );
+  protected $_referenceMap = array();
+
+  public function __construct($config = array())
+  {
+    parent::__construct($config);
+  }
+
+  public function getAll()
+  {
+    $oSelect = $this->select();
+    $oSelect->order("name");
+    $oRowset = $this->fetchAll($oSelect);
+    if ($oRowset instanceof Zend_Db_Table_Rowset_Abstract)
+      return $oRowset;
+    return null;
+  }
+
+  public function newUserCategory($sName)
+  {
+    $oRow = $this->createRow();
+    if ($oRow instanceof Zend_Db_Table_Row_Abstract) {
+      $oRow->name = $sName;
+      return $oRow->save();
+    }
+    return null;
+  }
+
+  public function edit($nId, $sName)
+  {
+    $oRow = $this->find($nId)->current();
+    if ($oRow instanceof Zend_Db_Table_Row_Abstract) {
+      $oRow->name = $sName;
+      return $oRow->save();
+    }
+    return null;
+  }
+
+  public function check($sName)
+  {
+    $oSelect = $this->select();
+    $oSelect->where("name = ?", $sName);
+    $oRow = $this->fetchRow($oSelect);
+    if ($oRow instanceof Zend_Db_Table_Row_Abstract)
+      return $oRow->id;
+    return null;
+  }
+
+  public function deleteUserCategory($nId)
+  {
+    if (is_numeric($nId)) {
+      return $this->delete($this->_db->quoteInto("id = ?", $nId));
+    }
+    return null;
+  }
+
+  public function deleteRow($nId)
+  {
+    if (is_numeric($nId)) {
+      return $this->delete($this->_db->quoteInto("id = ?", $nId));
+    }
+    return null;
+  }
+
+}
+
+?>

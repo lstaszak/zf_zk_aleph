@@ -1,0 +1,114 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $.each($(".form"), function (index, value) {
+      var form_height = parseInt($(value).actual("outerHeight", {
+        includeMargin: true
+      }));
+      $(value).parents(".form_wrapper").height(form_height + 80);
+      $(value).parents(".form_box").height(form_height + 80 - 20);
+    });
+    $(".fb_login").css({
+      "margin-top": "10px",
+      "margin-bottom": "10px",
+      "bottom": "5px",
+      "left": "280px",
+      "position": "relative"
+    });
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  $aError = $oElement->getMessages();
+  if (is_array($aError) && count($aError) > 0) {
+    foreach ($aError as $sErrorText) {
+      $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+    }
+    $oElement->setAttrib("class", "field_error");
+  }
+}
+$oFacebook = new Facebook_Facebook();
+$oUser = $oFacebook->getUser();
+?>
+<div class="form_wrapper">
+  <div class="form_box">
+    <form class="form" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+      <?php echo $this->element->csrf_token ?>
+      <?php echo $this->element->form_name ?>
+      <dl><?php echo $this->element->user_email_address ?></dl>
+      <dl><?php echo $this->element->user_password ?></dl>
+      <dl><?php echo $this->element->submit ?></dl>
+      <?php if (true): ?>
+        <div class="fb_login" scope="email,user_checkins">
+          <!DOCTYPE html>
+          <html xmlns:fb="http://www.facebook.com/2008/fbml">
+          <body>
+          <?php if (!$oUser): ?>
+            <div class="fb-login-button" scope="email,user_checkins">
+              Zaloguj za pomocą Facebooka
+            </div>
+          <?php endif ?>
+          <div id="fb-root"></div>
+          <script>
+            window.fbAsyncInit = function () {
+              FB.init({
+                appId: "<?php echo $oFacebook->getAppID() ?>",
+                cookie: true,
+                xfbml: true,
+                oauth: true
+              });
+              FB.Event.subscribe("auth.login", function (response) {
+                if (response.status === "connected") {
+                  $.ajax({
+                    url: baseurl + "/admin/user/fblogin",
+                    type: "POST",
+                    dataType: "json", data: "",
+                    success: function (resp) {
+                      if (resp == true)
+                        window.location.reload();
+                    },
+                    error: function (resp) {
+                      window.location.reload();
+                    }
+                  });
+                }
+              });
+              FB.Event.subscribe("auth.logout", function (response) {
+
+              });
+            };
+            (function (d) {
+              var js, id = "facebook-jssdk", ref = d.getElementsByTagName("script")[0];
+              if (d.getElementById(id)) {
+                return;
+              }
+              js = d.createElement("script");
+              js.id = id;
+              js.async = true;
+              js.src = "//connect.facebook.net/en_US/all.js";
+              ref.parentNode.insertBefore(js, ref);
+            }(document));
+          </script>
+          </body>
+          </html>
+        </div>
+      <?php endif; ?>
+      <dl style="position:relative; width:650px;">
+        <dt class="pos_left" style="width:210px;"><label style="color:red; font-size:13px; text-decoration:underline; cursor:default;">Pierwszy raz w usłudze Zamów kopię?</label></dt>
+        <dd id="" class="pos_left">
+          <a href="/admin/user/register">Załóż konto</a>
+        </dd>
+      </dl>
+      <dl style="position:relative; width:650px;">
+        <dt class="pos_left" style="width:210px;"><label style="color:red; font-size:13px; text-decoration:underline; cursor:default;">Nie pamiętasz hasła?</label></dt>
+        <dd id="" class="pos_left">
+          <a href="/admin/user/passwordremind">Przypomnij hasło</a>
+        </dd>
+      </dl>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left"><?php echo $this->translate("Pole obowiązkowe"); ?></span>
+    </div>
+  </div>
+</div>

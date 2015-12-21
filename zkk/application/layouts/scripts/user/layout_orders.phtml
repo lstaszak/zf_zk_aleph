@@ -1,0 +1,36 @@
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+  <?php echo $this->loadSkin("user"); ?>
+  <?php echo $this->headMeta(); ?>
+  <?php echo $this->headTitle(); ?>
+  <?php echo $this->headScript(); ?>
+  <?php echo $this->headLink(); ?>
+  <?php echo $this->googleAnalytics(); ?>
+</head>
+<body>
+<div id="container">
+  <header>
+    <div id="user_box">
+      <?php echo $this->userInfo(); ?>
+    </div>
+    <div id="header_baner"></div>
+  </header>
+  <nav id="menu">
+    <?php echo $this->loadMenu("topnav"); ?>
+  </nav>
+  <section id="breadcrumbs">
+    <?php echo $this->loadBreadcrumbs(); ?>
+  </section>
+  <section id="content_orders">
+    <?php echo $this->layout()->content ?>
+  </section>
+  <footer>
+    <p style="float:right;">Serwis zdalnego zamawiania kopii z materiałów bibliotecznych <a href="http://bg.pw.edu.pl" target="_blank">Biblioteki Głównej Politechniki Warszawskiej</a></p>
+
+    <p style="float:left;"><a class="statute" href="http://bg.pw.edu.pl/regulaminy/elektronicznego-zamawiania-kopii" target="_blank">Regulamin usługi</a></p>
+  </footer>
+</div>
+</body>
+</html>
+

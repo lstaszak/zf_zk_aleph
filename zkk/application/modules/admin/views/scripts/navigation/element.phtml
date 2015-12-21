@@ -1,0 +1,105 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    var $edit_button = $(".edit_element");
+    var $delete_button = $(".delete_element");
+    $(".value").css({
+      "width": "540px"
+    });
+    $edit_button.bind("click", function () {
+      $("html, body").animate({scrollTop: 0}, "slow");
+      var $t = $(this).parent();
+      var value = $t.find($(".value")).html();
+      var data = {};
+      data["module"] = 0;
+      data["controller"] = 1;
+      data["action"] = 2;
+      data["resource"] = 3;
+      data["privilege"] = 4;
+      $("#navigation_element_id option[value=\"" + data[$t.attr("id").split("_")[0]] + "\"]").attr("selected", true);
+      $("#value").val(value);
+      $("#navigation_element_id")
+        .selectmenu("destroy")
+        .selectmenu({
+          style: "dropdown"
+        }).css({
+          "z-index": "9999"
+        });
+      $("ul[id$=\"-menu\"] a").css({
+        "text-align": "left"
+      });
+      $("#navigation_element_id").selectmenu("disable");
+      $("#navigation_element_edit_id").val($t.attr("id").split("_")[1]);
+    });
+    $delete_button.bind("click", function () {
+      var $t = $(this).parent();
+      dialog_confirm_del_nav_element.init($t);
+      dialog_confirm_del_nav_element.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_usuniecie_elementu"));
+    });
+  });
+</script>
+<?php echo $this->oFormNavigationElement; ?>
+<?php if (count($this->aAllModule)): ?>
+  <p class="module strong"><?php echo $this->translate("Moduły"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="module_wrapper">
+    <?php foreach ($this->aAllModule as $aValue): ?>
+      <p id="module_<?php echo $aValue["id"]; ?>">
+        <strong class="value pos_left"><?php echo $aValue["value"]; ?></strong>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+<?php if (count($this->aAllController)): ?>
+  <p class="controller strong"><?php echo $this->translate("Kontrolery"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="controller_wrapper">
+    <?php foreach ($this->aAllController as $aValue): ?>
+      <p id="controller_<?php echo $aValue["id"]; ?>">
+        <strong class="value pos_left"><?php echo $aValue["value"]; ?></strong>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+<?php if (count($this->aAllAction)): ?>
+  <p class="action strong"><?php echo $this->translate("Akcje"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="action_wrapper">
+    <?php foreach ($this->aAllAction as $aValue): ?>
+      <p id="action_<?php echo $aValue["id"]; ?>">
+        <strong class="value pos_left"><?php echo $aValue["value"]; ?></strong>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+<?php if (count($this->aAllResource)): ?>
+  <p class="resource strong"><?php echo $this->translate("Zasoby"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="resource_wrapper">
+    <?php foreach ($this->aAllResource as $aValue): ?>
+      <p id="resource_<?php echo $aValue["id"]; ?>">
+        <strong class="value pos_left"><?php echo $aValue["value"]; ?></strong>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+<?php if (count($this->aAllPrivilege)): ?>
+  <p class="privilege strong"><?php echo $this->translate("Uprawnienia"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="privilege_wrapper">
+    <?php foreach ($this->aAllPrivilege as $aValue): ?>
+      <p id="privilege_<?php echo $aValue["id"]; ?>">
+        <strong class="value pos_left"><?php echo $aValue["value"]; ?></strong>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>

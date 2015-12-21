@@ -1,0 +1,38 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    var $edit_button = $(".edit_group");
+    var $delete_button = $(".delete_group");
+    $(".value").css({
+      "width": "600px"
+    });
+    $edit_button.bind("click", function () {
+      var $t = $(this).parent();
+      var role_name = $t.find($(".role_name")).html();
+      $("#role_edit_id").val($t.attr("id").split("_")[1]);
+      $("#role_name").val(role_name);
+      $("html, body").animate({scrollTop: 0}, "slow");
+    });
+    $delete_button.bind("click", function () {
+      var $t = $(this).parent();
+      dialog_confirm_delete.init($t);
+      dialog_confirm_delete.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_usuniecie_grupy"));
+    });
+  });
+</script>
+<?php echo $this->oFormUserRole; ?>
+<div id="success"><?php echo $this->sSuccess; ?></div>
+<?php if (count($this->aAllUserRole)): ?>
+<p class="user_role strong"><?php echo $this->translate("Grupy użytkowników"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+<div id="user_role_wrapper">
+  <?php foreach ($this->aAllUserRole as $aValue): ?>
+    <p id="role_<?php echo $aValue["id"]; ?>">
+        <span class="value pos_left">
+          <strong class="role_name"><?php echo $aValue["role_name"]; ?></strong>
+        </span>
+      <span class="delete_group pos_right" title="<?php echo $this->translate("Usuń"); ?>"></span>
+      <span class="edit_group pos_right" title="<?php echo $this->translate("Zmień"); ?>"></span>
+    </p>
+    <div class="clear" style="margin-bottom:5px;"></div>
+  <?php endforeach; ?>
+  <?php endif; ?>
+</div>

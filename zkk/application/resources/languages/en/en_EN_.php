@@ -1,0 +1,51 @@
+﻿<?php
+return array(
+  //menu
+  "Home" => "Home",
+  "O mnie" => "About me",
+  "Portfolio" => "Portfolio",
+  "Kontakt" => "Contact",
+  //formularze
+  "Imię:" => "Name:",
+  "Nazwisko:" => "Surname:",
+  "Imię i nazwisko:" => "Name:",
+  "Numer telefonu:" => "Phone:",
+  "Adres e-mail:" => "E-mail address:",
+  "Wiadomość:" => "Message:",
+  "Wyślij wiadomość" => "Send message",
+  "Wpisz wyszukiwaną frazę" => "Enter a search term",
+  //breadcrumbs
+  "Jesteś tutaj:" => "You are here:",
+  //userinfo
+  "Witaj" => "Welcome",
+  "Zaloguj" => "Login",
+  "Wyloguj" => "Logout",
+  "Pole obowiązkowe" => "Mandatory field",
+  //javascript
+  "Poprzedni" => "Previous",
+  "Następny" => "Next",
+  "Dodaj" => "Add",
+  "Usuń" => "Delete",
+  "Filtruj" => "Filter",
+  "Resetuj" => "Reset",
+  "Szczegóły" => "Details",
+  "Pokaż" => "Show",
+  "Anuluj" => "Cancel",
+  "Zamknij" => "Close",
+  //javascript dialog
+  "Potwierdzenie" => "Confirm",
+  "Błąd" => "Error",
+  "Wiadomość e-mail została wysłana" => "The message has been sent",
+  "Czy na pewno chcesz usunąć wybrane zdjęcie(a)?" => "Are you sure you want to delete the selected image(s)?",
+  "Czy na pewno chcesz usunąć wybrane zgłoszenie(a)?" => "Are you sure you want to delete the selected notification(s)?",
+  "Wystąpił błąd" => "An error occurred",
+  "Sukces" => "Success",
+  "Twoje konto zostało zaktualizowane" => "Your account has been updated",
+  "Twoje konto zostało utworzone, ale nie zostało jeszcze potwierdzone. Sprawdź swoje konto e-mail, aby dowiedzieć się wiecej" => "Your account has been created but has to be approved, please check your e-mail for details",
+  "Operacja zakończona sukcesem" => "Operation successful",
+  "Nowe hasło zostało wysłane na twój adres e-mail" => "A new password was sent to your registered e-mail address",
+  "Twoje nowe hasło zostało aktywowane" => "Your new password has been activated",
+  "Edytuj zdjęcie" => "Edit picture",
+  "Dodaj zdjęcie" => "Add picture",
+  "Przeglądaj" => "Browse",
+);

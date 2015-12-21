@@ -1,0 +1,176 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(window).on("scroll", function () {
+    });
+    make_sortable();
+    $(".value span, .trick_value span").hide();
+    $(".value, .trick_value").css({
+      "height": "37px"
+    });
+    $("ul.menu").css({
+      "cursor": "move"
+    });
+    function make_sortable() {
+      $(".menu, .submenu, .subsubmenu").sortable({
+        start: function (event, ui) {
+          if (ui.helper !== undefined)
+            ui.helper.css("position", "absolute").css("margin-top", $(window).scrollTop());
+        },
+        beforeStop: function (event, ui) {
+          if (ui.offset !== undefined)
+            ui.helper.css("margin-top", 0);
+        }
+      }).disableSelection();
+      $(".menu").sortable({
+        update: function (event, ui) {
+          var data = {};
+          var order = {};
+          $.each($("ul.menu > li"), function (index, value) {
+            order[parseInt($(value).attr("id").split("_")[1])] = index + 1;
+          });
+          data.element = "menu";
+          data.order = order;
+          $.ajax({
+            async: false,
+            url: baseurl + "/admin/navigation/setnavigationorder",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            success: function (resp) {
+            },
+            error: function (resp) {
+              dialog_msg.init();
+              dialog_msg.error();
+            }
+          });
+        }
+      });
+      $(".submenu").sortable({
+        update: function (event, ui) {
+          var data = {};
+          var order = {};
+          $.each($("ul.submenu"), function (index, value) {
+            $.each($(value).find("li"), function (index, value) {
+              order[parseInt($(value).attr("id").split("_")[1])] = index + 1;
+            });
+          });
+          data.element = "submenu";
+          data.order = order;
+          $.ajax({
+            async: false,
+            url: baseurl + "/admin/navigation/setnavigationorder",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            success: function (resp) {
+            },
+            error: function (resp) {
+              dialog_msg.init();
+              dialog_msg.error();
+            }
+          });
+        }
+      });
+      $(".subsubmenu").sortable({
+        update: function (event, ui) {
+          var data = {};
+          var order = {};
+          $.each($("ul.subsubmenu"), function (index, value) {
+            $.each($(value).find("li"), function (index, value) {
+              order[parseInt($(value).attr("id").split("_")[1])] = index + 1;
+            });
+          });
+          data.element = "subsubmenu";
+          data.order = order;
+          $.ajax({
+            async: false,
+            url: baseurl + "/admin/navigation/setnavigationorder",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            success: function (resp) {
+            },
+            error: function (resp) {
+              dialog_msg.init();
+              dialog_msg.error();
+            }
+          });
+        }
+      });
+    }
+
+    $("#navigation_module_id").bind("change", function (event) {
+      var selected_html = $(this).find("option:selected").html();
+      $("div[class^=wrapper_menu_]").hide();
+      $(".wrapper_menu_" + selected_html).show();
+    });
+    $("#navigation_module_id").trigger("change");
+  });
+</script>
+<?php echo $this->oFormNavigationOrder; ?>
+<?php if (count($this->aNavigation)): ?>
+  <?php foreach ($this->aNavigation as $sModuleName => $aModuleName): ?>
+    <?php if (count($aModuleName)): ?>
+      <div class="wrapper_menu_<?php echo $sModuleName; ?>">
+        <p class="strong"><?php echo $sModuleName; ?></p>
+        <ul class="menu">
+          <?php foreach ($aModuleName as $aMenu): ?>
+            <li id="menu_<?php echo $aMenu["id"]; ?>" style="border:1px solid #dddddd; margin-bottom:10px; background-color:#f0f0f0;">
+              <span class="trick_value">
+                <strong class="label"><?php echo $aMenu["label"]; ?></strong>
+                <span class="module"><?php echo $aMenu["module"]; ?></span>
+                <span class="controller"><?php echo $aMenu["controller"]; ?></span>
+                <span class="action"><?php echo $aMenu["action"]; ?></span>
+                <span class="resource"><?php echo $aMenu["resource"]; ?></span>
+                <span class="privilege"><?php echo $aMenu["privilege"]; ?></span>
+                <span class="visible"><?php echo $aMenu["visible"]; ?></span>
+              </span>
+
+              <div class="clear"></div>
+              <?php if (count($aMenu["pages"])): ?>
+                <ul class="submenu">
+                  <?php foreach ($aMenu["pages"] as $aSubmenu): ?>
+                    <li id="submenu_<?php echo $aSubmenu["id"]; ?>" class="ui-state-default">
+                      <span class="value">
+                        <strong class="label"><?php echo $aSubmenu["label"]; ?></strong>
+                        <span class="menu"><?php echo $aSubmenu["navigation_menu_id"]; ?></span>
+                        <span class="module"><?php echo $aSubmenu["module"]; ?></span>
+                        <span class="controller"><?php echo $aSubmenu["controller"]; ?></span>
+                        <span class="action"><?php echo $aSubmenu["action"]; ?></span>
+                        <span class="resource"><?php echo $aSubmenu["resource"]; ?></span>
+                        <span class="privilege"><?php echo $aSubmenu["privilege"]; ?></span>
+                        <span class="visible"><?php echo $aSubmenu["visible"]; ?></span>
+                      </span>
+
+                      <div class="clear"></div>
+                      <?php if (count($aSubmenu["pages"])): ?>
+                        <ul class="subsubmenu">
+                          <?php foreach ($aSubmenu["pages"] as $aSubsubmenu): ?>
+                            <li id="subsubmenu_<?php echo $aSubsubmenu["id"]; ?>" class="ui-state-default">
+                              <span class="value">
+                                <strong class="label"><?php echo $aSubsubmenu["label"]; ?></strong>
+                                <span class="menu"><?php echo $aSubsubmenu["navigation_submenu_id"]; ?></span>
+                                <span class="module"><?php echo $aSubsubmenu["module"]; ?></span>
+                                <span class="controller"><?php echo $aSubsubmenu["controller"]; ?></span>
+                                <span class="action"><?php echo $aSubsubmenu["action"]; ?></span>
+                                <span class="resource"><?php echo $aSubsubmenu["resource"]; ?></span>
+                                <span class="privilege"><?php echo $aSubsubmenu["privilege"]; ?></span>
+                                <span class="visible"><?php echo $aSubsubmenu["visible"]; ?></span>
+                              </span>
+
+                              <div class="clear"></div>
+                            </li>
+                          <?php endforeach; ?>
+                        </ul>
+                      <?php endif; ?>
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+  <?php endforeach; ?>
+<?php endif; ?>

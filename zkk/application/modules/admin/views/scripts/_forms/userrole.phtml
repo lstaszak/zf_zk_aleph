@@ -1,0 +1,53 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $.each($(".form"), function (index, value) {
+      var form_height = parseInt($(value).actual("outerHeight", {
+        includeMargin: true
+      }));
+      $(value).parents(".form_wrapper").height(form_height + 80);
+      $(value).parents(".form_box").height(form_height + 80 - 20);
+    });
+    dialog_msg.init();
+    if ($("#success").html() === "OK") {
+      dialog_msg.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_sukces_operacja"));
+    } else if ($("#success").html() === "NO OK") {
+      dialog_msg.error();
+    }
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  if (!in_array($oElement->getName(), array("seo_group", "chat_close_group"))) {
+    $aError = $oElement->getMessages();
+    if (is_array($aError) && count($aError) > 0) {
+      foreach ($aError as $sErrorText) {
+        $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+      }
+      $oElement->setAttrib("class", "field_error");
+    }
+  }
+}
+?>
+<div class="form_wrapper">
+  <div class="form_box">
+    <form class="form" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+      <?php foreach ($this->element as $oElement): ?>
+        <?php if (!in_array($oElement->getName(), array("seo_group", "chat_close_group", "not_valid"))): ?>
+          <?php if ($oElement->getType() == "Zend_Form_Element_Hidden" || $oElement->getType() == "Zend_Form_Element_Hash"): ?>
+            <?php echo $oElement; ?>
+          <?php else: ?>
+            <dl><?php echo $oElement; ?></dl>
+          <?php endif; ?>
+        <?php else: ?>
+          <dl><?php echo $oElement; ?></dl>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left"><?php echo $this->translate("Pole obowiązkowe"); ?></span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

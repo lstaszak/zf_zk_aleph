@@ -1,0 +1,266 @@
+.form_wrapper {
+  background-color:#2C4359;
+  border-bottom:5px solid #DDDDDD;
+  border-top:5px solid #DDDDDD;
+  display:none;
+  height:auto;
+}
+.form_box {
+  background:none repeat scroll 0 0 white;
+  height:auto;
+  margin:10px;
+  position:absolute;
+  text-align:left;
+  width:740px;
+  z-index:0;
+}
+.form_wrapper_ckeditor {
+  background-color:#2C4359;
+  border-bottom:5px solid #DDDDDD;
+  border-top:5px solid #DDDDDD;
+  height:520px;
+}
+.form_box_ckeditor {
+  background:none repeat scroll 0 0 white;
+  height:500px;
+  margin:10px;
+  position:absolute;
+  text-align:left;
+  width:700px;
+  z-index:0;
+}
+#form_ckeditor {
+  height:545px;
+  left:50px;
+  margin:10px auto 0;
+  position:absolute;
+  text-align:left;
+  top:0;
+  width:100px;
+}
+.form {
+  left:30px;
+  margin:10px auto 0;
+  position:absolute;
+  text-align:left;
+  top:0;
+}
+.errors_tip {
+  background-color:#FF6B7F;
+  border:1px solid #C50000;
+  box-shadow:0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 2px #C50000;
+  color:#3A3A3A;
+  height:auto !important;
+  left:460px;
+  min-height:10px;
+  position:absolute;
+  width:200px;
+  z-index:9999;
+}
+.errors_tip p {
+  color:#3A3A3A;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  font-style:normal;
+  padding:5px 10px;
+  text-decoration:none;
+  word-wrap:break-word;
+}
+dl {
+  padding:10px 0 0;
+}
+dt {
+  color:#3A3A3A;
+  display:block;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  font-style:normal;
+  font-weight:bold;
+  padding:0 0 2px;
+  text-decoration:none;
+}
+dt label.required:after {
+  content:url("../gfx/req.png");
+  width:120px;
+}
+dt label.optional {
+  display:block;
+  margin-top:7px;
+}
+dt label.required {
+  display:block;
+  margin-top:-1px;
+}
+label {
+  cursor:pointer;
+}
+dt {
+  padding-bottom:4px;
+}
+.pos_left {
+  float:left;
+  padding:0;
+}
+.pos_right {
+  float:right;
+  padding:0;
+}
+.pos_relative {
+  position:relative;
+}
+.hidden_field {
+  left:0;
+  position:absolute;
+  top:0;
+}
+#select_user-label {
+  display:none;
+}
+#select_user-label {
+  color:#132D4E;
+  margin-top:8px;
+}
+input, textarea, select, button {
+  background-color:white;
+  border:1px solid #DDDDDD;
+  color:#3A3A3A;
+  font-size:13px;
+  font-style:normal;
+  padding-left:3px;
+  text-decoration:none;
+}
+textarea {
+  border:0 solid #DDDDDD;
+}
+input {
+  height:28px;
+  width:254px;
+}
+#send_message {
+}
+input[type="checkbox"] {
+  border:0 solid black;
+  cursor:pointer;
+  height:0;
+  width:0;
+}
+input[type="checkbox"], input[type="radio"] {
+  background:url("../gfx/checkbox_radio.gif") no-repeat scroll 0 0 transparent;
+  height:12px;
+  vertical-align:middle;
+  width:20px;
+}
+input[type="checkbox"] {
+}
+input[type="radio"] {
+}
+input[type="checkbox"]:hover, input[type="radio"]:hover {
+}
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+}
+input[type="checkbox"]:checked:hover, input[type="radio"]:checked:hover {
+}
+input[type="radio"]:disabled, input[type="checkbox"]:disabled {
+  opacity:0.3;
+}
+input[type="submit"] {
+  /*height:32px;*/
+  cursor:pointer;
+  width:auto;
+}
+input#submit {
+  /*height:32px;*/
+  cursor:pointer;
+  width:auto;
+}
+input#submit:hover {
+  text-decoration:underline;
+}
+input[disabled], textarea[disabled] {
+  background-color:#F2F2F2;
+}
+select#type {
+  width:200px;
+}
+select[multiple="multiple"] {
+  height:28px;
+}
+textarea {
+  border:1px solid #DDDDDD;
+  height:140px;
+  padding-top:5px;
+  width:254px;
+}
+.field_error {
+  background-color:#FF6B7F;
+  border:1px solid #C50000;
+  box-shadow:0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 2px #C50000;
+  color:#3A3A3A;
+  font-size:13px;
+  text-decoration:none;
+}
+.errors_list {
+  float:left;
+  margin-bottom:20px;
+  margin-left:0;
+  margin-top:0;
+  width:600px;
+}
+.errors_list h2, .errors_list p {
+  color:#3A3A3A;
+  display:block;
+  font-size:12px;
+  font-style:normal;
+  font-weight:bold;
+  padding:2px 0;
+  text-decoration:none;
+}
+.errors_list p {
+  font-weight:normal;
+}
+#legend {
+  bottom:5px;
+  left:50px;
+  position:absolute;
+  width:300px;
+}
+#legend span {
+  color:#3A3A3A;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+}
+#req {
+  background:url("../gfx/req.png") no-repeat scroll 0 0 transparent;
+  height:20px;
+  margin-top:-6px;
+  width:20px;
+}
+dl {
+  position:relative;
+  width:500px;
+}
+dt {
+  float:left;
+  width:120px;
+}
+input:focus, textarea:focus {
+  border:1px solid #2C4359;
+  box-shadow:0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 2px #2C4359;
+}
+#copy-label label, #apprise-label label, #append_message-label label, #search_blank_notification_user_id-label label {
+  margin-top:3px;
+}
+label {
+  color:#3A3A3A;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  font-style:normal;
+  font-weight:bold;
+}
+button[title=close] {
+  height:auto;
+}
+button {
+  height:30px;
+}

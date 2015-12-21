@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    SyntaxHighlighter.highlight("code");
+    $("#fake_code").empty().hide();
+    var file_name = "<?php echo $this->sFileName; ?>";
+    $("#file_name").selectmenu("value", file_name);
+    var $edit_file_btn = $("<button id=\"edit_file_btn\" class=\"pos_left\">" + translator.get("btn_edytuj") + "</button>").bind("click",function () {
+      if (!$("#file_pthml_textarea").length) {
+        $edit_file_btn.hide();
+        $save_file_btn.show();
+        var encoded_string;
+        for (var key in SyntaxHighlighter.vars.highlighters) {
+          encoded_string = SyntaxHighlighter.vars.highlighters[key].code;
+        }
+        var $file_phtml = $("#file_phtml").empty().hide();
+        var decoded_string = $("#fake_code").html(encoded_string).text();
+        var $textarea = $("<textarea id=\"file_pthml_textarea\"></textarea>");
+        $textarea.insertBefore($file_phtml);
+        $("<div class=\"clear\"></div>").insertAfter("#file_pthml_textarea");
+        $textarea.css({
+          "width": "755px",
+          "height": "600px",
+          "font-size": "11px"
+        });
+        $textarea.text(decoded_string);
+      }
+    }).button().css({
+      "margin-top": "5px"
+    });
+    var $save_file_btn = $("<button id=\"save_file_btn\" class=\"pos_left\">" + translator.get("btn_zapisz") + "</button>").bind("click",function () {
+      var selected_file_phtml = $("#file_name").find("option:selected").html();
+      var file_phtml = $("#file_pthml_textarea").val();
+      var data = {};
+      data["file_name"] = selected_file_phtml;
+      data["file_phtml"] = file_phtml;
+      $.ajax({
+        url: baseurl + "/admin/settings/savefilephtml",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        success: function (resp) {
+          window.open(baseurl + "/admin/settings/editfilephtml", "_self");
+        },
+        error: function (resp) {
+
+        }
+      });
+    }).button().css({
+      "margin-top": "5px",
+      "margin-bottom": "5px"
+    });
+    $edit_file_btn.insertBefore("#file_phtml");
+    $save_file_btn.insertBefore("#file_phtml").hide();
+    $("<div class=\"clear\"></div>").insertAfter($("#" + $edit_file_btn.attr("id")));
+  });
+</script>
+<?php echo $this->oFormFilePhtml; ?>
+<div class="clear"></div>
+<pre name="code" id="file_phtml" class="brush:php;"><?php echo htmlentities($this->sFileContent, ENT_COMPAT, "UTF-8"); ?></pre>
+<div id="fake_code"></div>

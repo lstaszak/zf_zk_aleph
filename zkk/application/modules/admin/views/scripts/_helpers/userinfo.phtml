@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#user_info a").hover(function () {
+      $(this).css({
+        "text-decoration": "underline"
+      });
+    }, function () {
+      $(this).css({
+        "text-decoration": "none"
+      });
+    });
+  });
+</script>
+<?php if (isset($this->aUserInfo)): ?>
+  <div id="user_info">
+    <section>
+      <p><?php echo $this->translate("Witaj"); ?>, <span class="user_name"><?php echo $this->aUserInfo["first_name"] . " " . $this->aUserInfo["last_name"] ?></span></p>
+      <a href="<?php echo $this->sBaseUrl == "" ? "/borrower" : $this->sBaseUrl; ?>"><?php echo $this->translate("Przejdź do modułu czytelnika"); ?></a>
+      <a href="<?php echo $this->sBaseUrl == "" ? "/user" : $this->sBaseUrl; ?>"><?php echo $this->translate("Przejdź do modułu bibliotekarza"); ?></a>
+      <a href="<?php echo $this->sBaseUrl; ?>/admin/user/logout"><?php echo $this->translate("Wyloguj"); ?></a>
+    </section>
+  </div>
+<?php else: ?>
+  <div id="user_info">
+    <p><?php echo $this->translate("Witaj"); ?>, <span class="user_name"><?php echo $this->translate("Nieznajomy"); ?></span></p>
+    <a href="<?php echo $this->sBaseUrl; ?>/admin/user/login"><?php echo $this->translate("Zaloguj się"); ?></a>
+    <a href="<?php echo $this->sBaseUrl; ?>/admin/user/register"><?php echo $this->translate("Załóż konto"); ?></a>
+    <a href="<?php echo $this->sBaseUrl; ?>/admin/user/passwordremind"><?php echo $this->translate("Przypomnij hasło"); ?></a>
+  </div>
+<?php endif; ?>

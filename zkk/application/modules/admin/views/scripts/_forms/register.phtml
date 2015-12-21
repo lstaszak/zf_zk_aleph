@@ -1,0 +1,71 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $.each($(".form"), function (index, value) {
+      var form_height = parseInt($(value).actual("outerHeight", {
+        includeMargin: true
+      }));
+      $(value).parents(".form_wrapper").height(form_height + 80);
+      $(value).parents(".form_box").height(form_height + 80 - 20);
+    });
+    $("input[id*=submit][type=submit]").on("click", function (event) {
+      validate_ajax.url = "/admin/validator/validateform";
+      validate_ajax.validate($(this));
+      if ($(".errors_tip").length) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+    dialog_msg.init();
+    if ($("#success").html() === "OK") {
+      dialog_msg.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_sukces_utworzenie_konta"));
+    } else if ($("#success").html() === "NO OK") {
+      dialog_msg.error();
+    }
+    $.fn.hasAttr = function (name) {
+      return this.attr(name) !== undefined;
+    };
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  if (!in_array($oElement->getName(), array("seo_group", "chat_close_group"))) {
+    $aError = $oElement->getMessages();
+    if (is_array($aError) && count($aError) > 0) {
+      foreach ($aError as $sErrorText) {
+        $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+      }
+      $oElement->setAttrib("class", "field_error");
+    }
+  }
+}
+?>
+<div class="form_wrapper">
+  <div class="form_box">
+    <form class="form" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+      <?php echo $this->element->csrf_token ?>
+      <?php echo $this->element->form_name ?>
+      <?php echo $this->element->user_edit_id ?>
+      <dl><?php echo $this->element->role_id ?></dl>
+      <dl><?php echo $this->element->user_fb_id ?></dl>
+      <dl><?php echo $this->element->first_name ?></dl>
+      <dl><?php echo $this->element->last_name ?></dl>
+      <dl><?php echo $this->element->email_address ?></dl>
+      <dl><?php echo $this->element->email_address_confirm ?></dl>
+      <dl><?php echo $this->element->password ?></dl>
+      <dl><?php echo $this->element->phone_number ?></dl>
+      <dl><?php echo $this->element->user_category_id ?></dl>
+      <dl>
+        <dt id="user_picture_id-label" class="pos_left"><label class="" for="user_picture_id">Zdjęcie:</label></dt>
+        <dd id="user_picture_id" class="pos_left" style="width:140px; height:200px; border:1px solid #DDDDDD"></dd>
+      </dl>
+      <dl><?php echo $this->element->is_active ?></dl>
+      <dl><?php echo $this->element->submit ?></dl>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left"><?php echo $this->translate("Pole obowiązkowe"); ?></span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

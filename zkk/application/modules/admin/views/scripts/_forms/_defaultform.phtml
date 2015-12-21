@@ -1,0 +1,146 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    if ($(".multiselect").length)
+      $(".multiselect").multiselect();
+    $.each($(".form"), function (index, value) {
+      var form_height = parseInt($(value).actual("outerHeight", {
+        includeMargin: true
+      }));
+      $(value).parents(".form_wrapper").height(form_height + 80);
+      $(value).parents(".form_box").height(form_height + 80 - 20);
+    });
+    $("#lang, #translation, #menu_id, #layout_name").selectmenu("disable");
+    $("#recaptcha_response_field").css({
+      "height": "20px"
+    });
+    var group = $("[id^=fieldset-]");
+    group.css({
+      "border": "1px solid #DDDDDD",
+      "margin-bottom": "10px"
+    });
+    group.find("legend").css({
+      "margin-left": "10px",
+      "color": "#444444",
+      "display": "block",
+      "font-family": "Helvetica,Arial,sans-serif",
+      "font-size": "12px",
+      "font-style": "normal",
+      "font-weight": "bold",
+      "padding": "0 0 2px",
+      "text-decoration": "none"
+    });
+    group.find("dd").css({
+      "margin-bottom": "10px"
+    });
+    group.find("dt").css({
+      "margin-left": "5px"
+    });
+    if (group.length) {
+      $(".form_wrapper").height($(".form_wrapper").height() + 30);
+      $(".form_box").height($(".form_box").height() + 30);
+    }
+    $("#start_date").datepicker({
+      dateFormat: 'yy-mm-dd',
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      numberOfMonths: 3
+    });
+    $("#add_additional_seo_tag_keywords").on("click", function (event) {
+      var $keyword = $("#additional_seo_tag_keywords");
+      if ($keyword.val() !== "") {
+        $.each($keyword.val().split(","), function (index, value) {
+          value = $.trim(value);
+          if (!$("#seo_tag_keywords option[value='" + value + "']").length) {
+            var data = {};
+            data.value = value;
+            $.ajax({
+              async: false,
+              url: baseurl + "/admin/content/addadditionalseotagkeywords",
+              type: "POST",
+              dataType: "json",
+              data: data,
+              success: function (resp) {
+                if (resp === true) {
+                  $("#seo_tag_keywords").append('<option selected="selected" value="' + value + '">' + value + '</option>');
+                  $("#seo_tag_keywords").trigger("liszt:updated").trigger("change");
+                }
+              },
+              error: function (resp) {
+                dialog_msg.init();
+                dialog_msg.error();
+              }
+            });
+          }
+        });
+      }
+      $keyword.val("");
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    $("#additional_seo_tag_keywords").on("keypress", function (event) {
+      if (event.keyCode === 13) {
+        $("#add_additional_seo_tag_keywords").trigger("click");
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+    $("#add_additional_category_tag").on("click", function (event) {
+      var $category_tag = $("#additional_category_tag");
+      if ($category_tag.val() !== "") {
+        $.each($category_tag.val().split(","), function (index, value) {
+          value = $.trim(value);
+          if (!$("#category_tag option[value='" + value + "']").length) {
+            $("#category_tag").append('<option selected="selected" value="' + value + '">' + value + '</option>');
+            $("#category_tag").trigger("liszt:updated").trigger("change");
+          }
+        });
+      }
+      $category_tag.val("");
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    $("#additional_category_tag").on("keypress", function (event) {
+      if (event.keyCode === 13) {
+        $("#add_additional_category_tag").trigger("click");
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  if (!in_array($oElement->getName(), array("seo_group", "chat_close_group", "not_valid"))) {
+    $aError = $oElement->getMessages();
+    if (is_array($aError) && count($aError) > 0) {
+      foreach ($aError as $sErrorText) {
+        $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+      }
+      $oElement->setAttrib("class", "field_error");
+    }
+  }
+}
+?>
+<div class="form_wrapper">
+  <div class="form_box">
+    <form class="form" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+      <?php foreach ($this->element as $oElement): ?>
+        <?php if (!in_array($oElement->getName(), array("seo_group", "chat_close_group", "not_valid"))): ?>
+          <?php if ($oElement->getType() == "Zend_Form_Element_Hidden" || $oElement->getType() == "Zend_Form_Element_Hash"): ?>
+            <?php echo $oElement; ?>
+          <?php else: ?>
+            <dl><?php echo $oElement; ?></dl>
+          <?php endif; ?>
+        <?php else: ?>
+          <dl><?php echo $oElement; ?></dl>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left"><?php echo $this->translate("Pole obowiązkowe"); ?></span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

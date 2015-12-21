@@ -1,0 +1,15 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".strong").eq(0).css({
+      "margin-top": "0px"
+    });
+  });
+</script>
+<?php if (isset($this->oFormNewPayment)): ?>
+  <?php echo $this->oFormNewPayment; ?>
+<?php elseif (isset($this->oFormPayU)): ?>
+  <?php echo $this->oFormPayU; ?>
+  <?php
+else: ?>
+  <p class="strong">Twój koszyk jest pusty</p>
+<?php endif; ?>

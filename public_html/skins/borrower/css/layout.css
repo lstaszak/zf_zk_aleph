@@ -1,0 +1,208 @@
+body {
+  color:#444444;
+  padding:0;
+}
+#container_debug {
+  background-color:#313030;
+  display:block;
+  height:auto !important;
+  margin:0 auto;
+  min-height:0;
+  position:relative;
+  text-align:left;
+  top:0;
+  width:980px;
+  z-index:10000;
+}
+#container {
+  background-color:#ECECEC;
+  border:0 solid #C0C0C0;
+  display:block;
+  margin:0 auto;
+  position:relative;
+  text-align:left;
+  top:0;
+  width:980px !important;
+}
+header {
+  border-top:0 solid #DDDDDD;
+  height:340px;
+  width:980px;
+}
+#header_baner {
+  margin-top:30px;
+  width:980px;
+  height:300px;
+  background:url("../gfx/header_baner.png") no-repeat scroll 0 0 transparent;
+}
+#login_baner {
+  margin-top:30px;
+  width:980px;
+  height:300px;
+  background:url("../gfx/login_baner.png") no-repeat scroll 0 0 transparent;
+}
+#user_box {
+  display:block;
+  float:left;
+  margin-top:5px;
+  width:980px;
+}
+#user_box p, #user_box a {
+  color:#444444;
+  font-size:12px;
+  margin:0 5px;
+}
+#user_box a {
+  color:#444444;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+#user_info {
+  display:block;
+  float:right;
+}
+#user_info p, #user_info a {
+  float:left;
+}
+#menu {
+  border-bottom:1px solid #DDDDDD;
+  height:50px;
+  width:980px;
+}
+#breadcrumbs {
+  background-color:white;
+  border-bottom:0 solid #DDDDDD;
+  border-top:0 solid #DDDDDD;
+  height:20px;
+  margin-bottom:5px;
+  margin-top:5px;
+  padding-top:3px;
+  width:952px;
+}
+#breadcrumbs p {
+  color:#444444;
+  left:0px;
+  position:absolute;
+}
+#breadcrumbs span, #breadcrumbs a {
+  color:#444444;
+}
+#breadcrumbs span.breadcrumbs_spacer {
+  display:inline-block;
+  margin:-2px 5px 0;
+  vertical-align:middle;
+  width:5px;
+}
+#content {
+  background-color:white;
+  border-left:0 solid #DDDDDD;
+  float:right;
+  height:auto !important;
+  min-height:560px;
+  padding-bottom:20px;
+  padding-left:5px;
+  padding-right:0px;
+  width:980px;
+}
+#content_login_index {
+  background-color:white;
+  border-left:0 solid #DDDDDD;
+  float:right;
+  height:auto !important;
+  min-height:30px;
+  padding-bottom:20px;
+  padding-left:5px;
+  padding-right:0px;
+  width:980px;
+}
+#left_menu {
+  height:auto !important;
+  margin-bottom:10px;
+  min-height:30px;
+  width:200px;
+}
+#left_menu ul {
+  list-style:none outside none;
+}
+footer {
+  background-color:white;
+  border-bottom:0 solid #DDDDDD;
+  border-top:0 solid #DDDDDD;
+  height:auto !important;
+  min-height:40px;
+  position:relative;
+  width:980px;
+  padding-top:30px;
+}
+.prev, .next {
+  color:#B81624;
+}
+.prev.click_able, .next.click_able {
+  color:#222222;
+}
+.page_number, .prev, .next {
+  color:#222222;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:normal;
+  line-height:150%;
+  padding-left:5px;
+  padding-right:5px;
+  text-decoration:none;
+}
+.sort_arrow, .sort_arrow_asc, .sort_arrow_desc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll -14px 0 transparent;
+  display:block;
+  height:11px;
+  margin-top:8px;
+  padding:0;
+  width:7px;
+}
+.sort_arrow_asc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll -7px 0 transparent;
+}
+.sort_arrow_desc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll 0 0 transparent;
+}
+.ui-button-icon-only .ui-icon {
+  margin-left:-8px;
+}
+.strong {
+  color:#444444;
+}
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: .7em .7em;
+  text-decoration: none;
+}
+html body div#container section#content_orders div#tabs.ui-tabs div#ui-tabs-7.ui-tabs-panel span a#num_row_per_page-button.ui-selectmenu {
+  /*height:28px;*/
+}
+.ui-button {
+  display:inline-block;
+  position:relative;
+  padding:0;
+  line-height:normal;
+  margin-right:.1em;
+  margin-left:.1em;
+  cursor:pointer;
+  vertical-align:middle;
+  text-align:center;
+  overflow:visible;
+}
+.ui-tabs .ui-tabs-panel {
+  padding:1em 0;
+}
+#content_orders {
+  width:980px;
+}
+.ui-dialog .ui-dialog-title {
+  width:100%;
+}
+footer a.statute {
+  text-transform:uppercase;
+  font-weight:bold;
+}
+footer a.statute:hover {
+  text-decoration:underline;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+  <stylesheets>
+    <stylesheet>form.css</stylesheet>
+    <stylesheet>layout.css</stylesheet>
+    <stylesheet>menu.css</stylesheet>
+    <stylesheet>shCoreDefault.css</stylesheet>
+    <stylesheet>table_image.css</stylesheet>
+    <stylesheet>table_user.css</stylesheet>
+  </stylesheets>
+</skin>

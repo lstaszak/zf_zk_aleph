@@ -1,0 +1,98 @@
+.paginated {
+  display:none;
+  margin:10px 0 0;
+  padding:0;
+  width:920px;
+}
+.paginated thead th {
+  background-color:#fafafa;
+  height:30px;
+}
+.paginated tbody {
+  border-spacing:0;
+}
+.paginated thead th span {
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  margin-left:5px;
+}
+.paginated tbody td {
+  height:40px;
+  text-align:center;
+}
+.paginated tbody p, .page_number, .prev, .next {
+  color:#444444;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  line-height:150%;
+  padding-left:2px;
+  padding-right:0;
+  text-decoration:none;
+}
+.prev.click_not_able, .next.click_not_able {
+  color:silver;
+  cursor:default;
+}
+.paginated tbody a {
+  color:black;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:12px;
+  line-height:150%;
+  text-decoration:none;
+}
+.page_number {
+  font-size:13px;
+  margin-left:2px;
+  margin-right:2px;
+}
+.pager {
+  margin-top:10px;
+}
+.pager .active {
+  color:#444444;
+  font-size:13px;
+  font-weight:bold;
+}
+.sort_arrow, .sort_arrow_asc, .sort_arrow_desc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll -14px 0 transparent;
+  display:block;
+  height:11px;
+  margin-top:2px;
+  padding:0;
+  width:7px;
+}
+.sort_arrow_asc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll -7px 0 transparent;
+}
+.sort_arrow_desc {
+  background:url("../gfx/arrow_sort.png") no-repeat scroll 0 0 transparent;
+}
+.paginated .odd {
+  background-color:white;
+}
+.paginated .even {
+  background-color:#FAFAFA;
+}
+.paginated tr.ui-selected {
+  background-color:#E2E9F0;
+}
+.paginated img {
+  border:0 solid #DDDDDD;
+  margin:10px;
+}
+.paginated button {
+  margin-left:0;
+}
+.click_able {
+  cursor:pointer;
+}
+.filter {
+  text-align:center;
+}
+.filter input {
+  height:22px;
+  width:40px;
+}
+.paginated thead th span {
+  font-weight:normal;
+}

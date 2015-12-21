@@ -1,0 +1,184 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    var $edit_button = $(".edit_nav");
+    var $copy_button = $(".copy_nav");
+    var $delete_button = $(".delete_nav");
+    $edit_button.bind("click", function () {
+      var $t = $(this).parent();
+      var value = $t.find($(".trick_value"));
+      var menu = {};
+      $("#navigation_menu_edit_id").val($t.attr("id").split("_")[1]);
+      $.each(value.find("strong, span"), function (index, value) {
+        menu[$(value).attr("class")] = $(value).html();
+      });
+      $("#label").val(menu["label"]);
+      $("#desc").val(menu["desc"]);
+      $("#image_id").selectmenu("value", parseInt(menu["image_id"]));
+      $("#visible").selectmenu("value", parseInt(menu["visible"]));
+      $.each(menu, function (index, value) {
+        if ($("#navigation_" + index + "_id").length) {
+          $("#navigation_" + index + "_id").selectmenu("value", parseInt($("#navigation_" + index + "_id" + " option[label=\"" + value + "\"]").val()));
+        }
+      });
+      var data = {};
+      data["id"] = $t.attr("id").split("_")[1];
+      data["element"] = "menu";
+      $.ajax({
+        async: true,
+        url: baseurl + "/admin/navigation/getnavigationoptionuserrole",
+        type: "post",
+        dataType: "json",
+        data: data,
+        success: function (resp) {
+          $.each($("#user_role option"), function (index, value) {
+            $(value).removeAttr("selected");
+            var val = $(value).val();
+            var $multiselect = $("#user_role").multiselect("widget").find('input[value=' + val + ']');
+            if ($multiselect.attr("aria-selected") === "true") {
+              $multiselect.trigger("click");
+              $multiselect.attr("aria-selected", false);
+            } else if ($("#user_role").multiselect("widget").find('input[value=' + val + ']').attr("aria-selected") === "undefined") {
+              $multiselect.attr("aria-selected", false);
+            }
+          });
+          $.each(resp, function (key, value) {
+            $("#user_role option[value=\"" + value.user_role_id + "\"]").attr("selected", true);
+            $("#user_role").multiselect("widget").find('input[value=' + value.user_role_id + ']').trigger("click");
+          });
+          $("#user_role").multiselect("refresh");
+        },
+        error: function (resp) {
+          dialog_msg.init();
+          dialog_msg.error();
+        }
+      });
+      if (parseInt($("#navigation_module_id").selectmenu("value")) === 2) {
+        var data = {};
+        data["id"] = $t.attr("id").split("_")[1];
+        $.ajax({
+          async: true,
+          url: baseurl + "/admin/navigation/getsitelayoutid",
+          type: "post",
+          dataType: "json",
+          data: data,
+          success: function (resp) {
+            if (resp !== null) {
+              $("#site_layout_id").selectmenu("value", resp["site_layout_id"]);
+            }
+          },
+          error: function (resp) {
+            dialog_msg.init();
+            dialog_msg.error();
+          }
+        });
+      }
+      $("html, body").animate({scrollTop: 0}, "slow");
+    });
+    $copy_button.bind("click", function () {
+      var $t = $(this).parent();
+      $t.find(".edit_nav").trigger("click");
+      $("#navigation_menu_edit_id").val(0);
+    });
+    $delete_button.bind("click", function () {
+      var $t = $(this).parent();
+      dialog_confirm_del_nav_menu.init($t);
+      dialog_confirm_del_nav_menu.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_usuniecie_elementu"));
+    });
+    $("#navigation_module_id").bind("change", function () {
+      var selected_value = parseInt($(this).selectmenu("value"));
+      if (selected_value === 2) {
+        $("#image_id, #site_layout_id").selectmenu("enable");
+        $("#navigation_controller_id, #navigation_action_id").selectmenu("disable");
+        $("#navigation_controller_id").selectmenu("value", parseInt($("#navigation_controller_id").find("option[label=index]").val()));
+        $("#navigation_action_id").selectmenu("value", parseInt($("#navigation_action_id").find("option[label=index]").val()));
+      } else {
+        $("#image_id, #site_layout_id").selectmenu("disable");
+        $("#image_id").selectmenu("value", parseInt($("#image_id").find("option").eq(0).val()));
+        $("#site_layout_id").selectmenu("value", parseInt($("#site_layout_id").find("option").eq(0).val()));
+        $("#navigation_controller_id, #navigation_action_id").selectmenu("enable");
+      }
+    });
+    $("#site_layout_id").bind("change", function () {
+      var site_layout_id = $(this).selectmenu("value");
+      var site_layout_name = $(this).find("option[value=" + site_layout_id + "]").html();
+      $("#layout_name").val(site_layout_name);
+    });
+    $(".value span, .trick_value span").hide();
+    $(".value, .trick_value").css({
+      "height": "37px"
+    });
+    $("#navigation_module_id, #site_layout_id").trigger("change");
+  });
+</script>
+<?php echo $this->oFormNavigationElement; ?>
+<?php if (count($this->aNavigation)): ?>
+  <?php foreach ($this->aNavigation as $sModuleName => $aModuleName): ?>
+    <?php if (count($aModuleName)): ?>
+      <p class="<?php echo $sModuleName; ?> strong"><?php echo $sModuleName; ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+      <div id="<?php echo $sModuleName; ?>_wrapper">
+        <ul class="menu">
+          <?php foreach ($aModuleName as $aMenu): ?>
+            <li id="menu_<?php echo $aMenu["id"]; ?>" style="border:1px solid #dddddd; margin-bottom:10px; background-color:#f0f0f0;">
+              <span class="trick_value pos_left">
+                <strong class="label"><?php echo $aMenu["label"]; ?></strong>
+                <span class="desc"><?php echo $aMenu["desc"]; ?></span>
+                <span class="image_id"><?php echo $aMenu["image_id"]; ?></span>
+                <span class="module"><?php echo $aMenu["module"]; ?></span>
+                <span class="controller"><?php echo $aMenu["controller"]; ?></span>
+                <span class="action"><?php echo $aMenu["action"]; ?></span>
+                <span class="resource"><?php echo $aMenu["resource"]; ?></span>
+                <span class="privilege"><?php echo $aMenu["privilege"]; ?></span>
+                <span class="visible"><?php echo $aMenu["visible"]; ?></span>
+              </span>
+              <span class="delete_nav pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+              <span class="edit_nav pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+              <span class="copy_nav pos_right" title="Kopiuj"></span>
+
+              <div class="clear"></div>
+              <?php if (count($aMenu["pages"])): ?>
+                <ul class="submenu">
+                  <?php foreach ($aMenu["pages"] as $aSubmenu): ?>
+                    <li id="submenu_<?php echo $aSubmenu["id"]; ?>" class="ui-state-default">
+                      <span class="value pos_left">
+                        <strong class="label"><?php echo $aSubmenu["label"]; ?></strong>
+                        <span class="menu"><?php echo $aSubmenu["navigation_menu_id"]; ?></span>
+                        <span class="module"><?php echo $aSubmenu["module"]; ?></span>
+                        <span class="controller"><?php echo $aSubmenu["controller"]; ?></span>
+                        <span class="action"><?php echo $aSubmenu["action"]; ?></span>
+                        <span class="resource"><?php echo $aSubmenu["resource"]; ?></span>
+                        <span class="privilege"><?php echo $aSubmenu["privilege"]; ?></span>
+                        <span class="visible"><?php echo $aSubmenu["visible"]; ?></span>
+                      </span>
+
+                      <div class="clear"></div>
+                      <?php if (count($aSubmenu["pages"])): ?>
+                        <ul class="subsubmenu">
+                          <?php foreach ($aSubmenu["pages"] as $aSubsubmenu): ?>
+                            <li id="subsubmenu_<?php echo $aSubsubmenu["id"]; ?>" class="ui-state-default">
+                              <span class="value pos_left">
+                                <strong class="label"><?php echo $aSubsubmenu["label"]; ?></strong>
+                                <span class="submenu"><?php echo $aSubsubmenu["navigation_submenu_id"]; ?></span>
+                                <span class="module"><?php echo $aSubsubmenu["module"]; ?></span>
+                                <span class="controller"><?php echo $aSubsubmenu["controller"]; ?></span>
+                                <span class="action"><?php echo $aSubsubmenu["action"]; ?></span>
+                                <span class="resource"><?php echo $aSubsubmenu["resource"]; ?></span>
+                                <span class="privilege"><?php echo $aSubsubmenu["privilege"]; ?></span>
+                                <span class="visible"><?php echo $aSubsubmenu["visible"]; ?></span>
+                              </span>
+
+                              <div class="clear"></div>
+                            </li>
+                          <?php endforeach; ?>
+                        </ul>
+                      <?php endif; ?>
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+  <?php endforeach; ?>
+<?php endif; ?>

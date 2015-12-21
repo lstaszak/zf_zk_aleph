@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#tabs").tabs({
+      load: function (event, ui) {
+        var $tabs = $("#tabs");
+        var order_status_id = parseInt($("#tabs li").eq($tabs.tabs("option", "active")).attr("id").split("-")[1]);
+        window.location.href = "#ui-tabs-" + order_status_id;
+        $.each($(".ui-tabs-panel"), function (index, value) {
+          var id = parseInt($(value).attr("id").split("-")[2]);
+          if (order_status_id === id)
+            $("#ui-tabs-" + order_status_id).find(".paginated").attr("id", "order_status-" + order_status_id);
+          else
+            $(value).empty();
+        });
+        table_order_user.init(order_status_id, 0);
+      }
+    });
+  });
+</script>
+<div id="tabs">
+  <ul>
+    <?php foreach ($this->aAllStatuses as $nKey => $aValue): ?>
+      <?php if ($aValue["count"]): ?>
+        <li id="order_status_id-<?php echo $aValue["id"] ?>"><a href="/user/orders/table"><?php echo $aValue["user_name"] . " <span class=\"order_count\">(" . $aValue["count"] . ")</span>"; ?></a></li>
+      <?php else: ?>
+        <li id="order_status_id-<?php echo $aValue["id"] ?>"><a href="/user/orders/table"><?php echo $aValue["user_name"] . " <span class=\"order_count\">(0)</span>"; ?></a></li>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </ul>
+</div>
+<div id="dialog_order_setting" title=""></div>
+<div id="dialog_order_add_file" title="">
+  <div id="wrapper_upload">
+    <?php $aParam = array("action" => $this->baseUrl("user/orders/addfile")); ?>
+    <?php echo $this->partial("_forms/uploadfile.phtml", array("param" => $aParam)); ?>
+  </div>
+</div>

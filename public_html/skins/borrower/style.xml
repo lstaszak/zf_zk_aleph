@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+  <stylesheets>
+    <stylesheet>form.css</stylesheet>
+    <stylesheet>layout.css</stylesheet>
+    <stylesheet>menu.css</stylesheet>
+    <stylesheet>table_orders.css</stylesheet>
+    <stylesheet>table_payments.css</stylesheet>
+  </stylesheets>
+</skin>

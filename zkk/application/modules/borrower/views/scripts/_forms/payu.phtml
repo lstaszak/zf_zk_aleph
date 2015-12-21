@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#form_wrapper").hide();
+    $("#ajax_overlay").dialog("open");
+    $("#submit").trigger("click");
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  $aError = $oElement->getMessages();
+  if (is_array($aError) && count($aError) > 0) {
+    foreach ($aError as $sErrorText) {
+      $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+    }
+    $oElement->setAttrib("class", "field_error");
+  }
+}
+?>
+<div id="form_wrapper">
+  <div id="form_box">
+    <form id="form" action="<?php echo $this->element->getAction(); ?>"
+          method="<?php echo $this->element->getMethod(); ?>">
+      <?php foreach ($this->element as $oElement): ?>
+        <?php if ($oElement->getType() == "Zend_Form_Element_Hidden" || $oElement->getType() == "Zend_Form_Element_Hash"): ?>
+          <?php echo $oElement; ?>
+        <?php else: ?>
+          <dl><?php echo $oElement; ?></dl>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left">Pole obowiązkowe</span>
+    </div>
+  </div>
+</div>

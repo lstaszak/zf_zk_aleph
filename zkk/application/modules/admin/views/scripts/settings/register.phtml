@@ -1,0 +1,99 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    table_user.init(parseInt(0));
+    $(".strong").eq(0).css({
+      "margin-top": "0px"
+    }).trigger("click");
+  });
+</script>
+<p class="register strong"><?php echo $this->translate("Załóż nowe / edytuj istniejące konto"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+<div id="register_wrapper">
+  <?php echo $this->oFormRegister; ?>
+</div>
+<p class="user strong"><?php echo $this->translate("Użytkownicy"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+<div id="user_wrapper">
+  <table id="table_user" class="paginated" style="display:block">
+    <thead>
+    <tr id="sort_able">
+      <th data-width="5">
+        <span class="pos_left"></span>
+      </th>
+      <th class="sort" id="image" data-width="10">
+        <span class="pos_left"><?php echo $this->translate("Zdjęcie"); ?></span>
+      </th>
+      <th class="sort" id="user_name" data-width="30">
+        <span class="pos_left"><?php echo $this->translate("Imię i nazwisko"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th class="sort" id="email_address" data-width="30">
+        <span class="pos_left"><?php echo $this->translate("Adres e-mail"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th class="sort" id="user_category_name" data-width="10">
+        <span class="pos_left"><?php echo $this->translate("Profil"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th id="switch_user" data-width="5">
+        <span class="pos_left"><?php echo $this->translate(""); ?></span>
+      </th>
+      <th id="edit_user" data-width="5">
+        <span class="pos_left"><?php echo $this->translate(""); ?></span>
+      </th>
+      <th id="delete_user" data-width="5">
+        <span class="pos_left"><?php echo $this->translate(""); ?></span>
+      </th>
+    </tr>
+    <tr id="filter_able">
+      <th style="background-color:white; text-align:center;">
+        <input style="margin-top:4px;" type="checkbox" name="check_all_top" id="check_all_top" value="1" class="checkbox">
+      </th>
+      <th style="background-color:white"></th>
+      <th class="filter" style="background-color:white"></th>
+      <th class="filter" style="background-color:white"></th>
+      <th class="filter" style="background-color:white"></th>
+      <th style="background-color:white"></th>
+      <th style="background-color:white"></th>
+      <th style="background-color:white"></th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<div id="dialog_add_file" title="">
+  <div id="wrapper_upload">
+    <?php
+    $aParam = array(
+      "action" => $this->baseUrl("admin/settings/addpicture"),
+      "input" => array(
+        "<input id=\"media_width\" type=\"hidden\" value=\"140\" name=\"media_width\">",
+        "<input id=\"media_height\" type=\"hidden\" value=\"200\" name=\"media_height\">",
+        "<input id=\"add_photo_user_id\" type=\"hidden\" value=\"\" name=\"add_photo_user_id\">"
+      )
+    );
+    ?>
+    <?php echo $this->partial("_forms/uploadfile.phtml", array("param" => $aParam)); ?>
+  </div>
+</div>
+<style type="text/css">
+  .pos_right {
+    padding: 5px 0 0;
+  }
+
+  .image {
+    display: block;
+    width: 70px;
+    height: 100px;
+  }
+</style>

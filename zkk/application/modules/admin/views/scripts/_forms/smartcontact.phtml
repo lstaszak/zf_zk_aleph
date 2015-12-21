@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $.each($(".form"), function (index, value) {
+      var form_height = parseInt($(value).actual("outerHeight", {
+        includeMargin: true
+      }));
+      $(value).parents(".form_wrapper").height(form_height + 80);
+      $(value).parents(".form_box").height(form_height + 80 - 20);
+    });
+    $("#smart_submit").bind("click", function (event) {
+      validate_ajax.url = "/admin/validator/validateform";
+      validate_ajax.validate($(this));
+      if ($(".errors_tip").length) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      $(".admin_form_smartcontact").submit();
+    });
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  if ($oElement->getName() != "seo_group") {
+    $aError = $oElement->getMessages();
+    if (is_array($aError) && count($aError) > 0) {
+      foreach ($aError as $sErrorText) {
+        $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+      }
+      $oElement->setAttrib("class", "field_error");
+    }
+  }
+}
+?>
+<form id="<?php echo $this->element->getName(); ?>" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+  <?php foreach ($this->element as $oElement): ?>
+    <?php if ($oElement->getName() != "seo_group"): ?>
+      <?php if ($oElement->getType() == "Zend_Form_Element_Hidden" || $oElement->getType() == "Zend_Form_Element_Hash"): ?>
+        <?php echo $oElement; ?>
+      <?php else: ?>
+        <dl><?php echo $oElement; ?></dl>
+      <?php endif; ?>
+    <?php else: ?>
+      <?php echo $oElement; ?>
+    <?php endif; ?>
+  <?php endforeach; ?>
+  <p id="smart_submit">Wyślij wiadomość</p>
+</form>
+<div class="clear"></div>

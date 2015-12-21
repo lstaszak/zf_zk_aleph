@@ -1,0 +1,48 @@
+<table class="paginated table_order" style="display:none">
+  <thead>
+  <tr id="sort_able">
+    <th data-width="5">
+      <span class="pos_left"></span>
+    </th>
+    <th data-id="id" data-col_name="id" data-width="12" class="sort">
+      <span class="pos_left"><?php echo $this->translate("Nr zamówienia"); ?></span>
+      <span class="pos_left sort_arrow"></span>
+    </th>
+    <th data-id="journal_title" data-col_name="journal_title" data-width="33" class="sort">
+      <span class="pos_left"><?php echo $this->translate("Tytuł książki / czasopisma"); ?></span>
+      <span class="pos_left sort_arrow"></span>
+    </th>
+    <th data-id="pages" data-col_name="pages" data-width="10">
+      <span class="pos_left"><?php echo $this->translate("Strony"); ?></span>
+    </th>
+    <th data-id="amount" data-col_name="amount" data-width="10" class="sort">
+      <span class="pos_left"><?php echo $this->translate("Cena"); ?></span>
+      <span class="pos_left sort_arrow"></span>
+    </th>
+    <th data-col_name="relationships_count" data-width="30">
+      <span class="pos_left"><?php echo $this->translate("Relacje między zamówieniami"); ?></span>
+    </th>
+  </tr>
+  <tr id="filter_able">
+    <th style="background-color:white; text-align:center;">
+      <input style="margin-top:4px;" type="checkbox" name="check_all_top" id="check_all_top" value="1" class="checkbox">
+    </th>
+    <th class="filter" style="background-color:white"></th>
+    <th class="filter" style="background-color:white"></th>
+    <th style="background-color:white"></th>
+    <th class="filter" style="background-color:white"></th>
+    <th style="background-color:white"></th>
+  </tr>
+  </thead>
+  <tbody></tbody>
+  <tfoot>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </tfoot>
+</table>

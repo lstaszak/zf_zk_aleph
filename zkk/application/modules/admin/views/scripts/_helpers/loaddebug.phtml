@@ -1,0 +1,56 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#content_debug p").css({
+      "font-size": "11px",
+      "margin": "2px",
+      "padding": "2px"
+    });
+    $("#content_debug").css({
+      "margin": "5px",
+      "color": "white",
+      "position": "relative"
+    });
+    $(".debug_db").css({
+      "border": "1px dotted #ff0030",
+      "margin-bottom": "2px"
+    });
+    $(".debug_db_query").css({
+      "font-weight": "bold",
+      "color": "black"
+    });
+    $(".debug_db_query_time").css({
+      "background-color": "#b9b9bc"
+    });
+    $("#footer_debug_toggle").bind("click", function () {
+      $("#content_debug").toggle(0, function () {
+        if ($("#content_debug").is(":visible"))
+          $("#footer_debug_toggle").css({
+            "background": "url(" + host + baseurl + "/skins/admin/gfx/footer_debug_toggle.png\") no-repeat scroll 0 -30px #454255"
+          });
+        else
+          $("#footer_debug_toggle").css({
+            "background": "url(" + host + baseurl + "/skins/admin/gfx/footer_debug_toggle.png\") no-repeat scroll 0 0 #454255"
+          });
+      });
+    });
+  });
+</script>
+<div id="container_debug">
+  <div id="content_debug">
+    <p class="debug_db_query">Liczba zapytań: <?php echo $this->nNumQueries; ?></p>
+    <?php if ($this->oQueryProfiles): ?>
+      <?php foreach ($this->oQueryProfiles as $oValue): ?>
+        <div class="debug_db">
+          <p class="debug_db_query">
+            <?php echo $oValue->getQuery(); ?>
+          </p>
+
+          <p class="debug_db_query_time"><?php echo $oValue->getElapsedSecs(); ?></p>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </div>
+  <div id="footer_debug">
+    <div id="footer_debug_toggle"></div>
+  </div>
+</div>

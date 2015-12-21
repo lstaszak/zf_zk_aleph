@@ -1,0 +1,79 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("input[id*=submit][type=submit]").unbind("click").bind("click", function (event) {
+      validate_ajax.url = "/admin/validator/validateform";
+      validate_ajax.validate($(this));
+      if ($(".errors_tip").length) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+    if ($(".multiselect").length)
+      $(".multiselect").multiselect();
+    $("#lang, #translation, #menu_id, #layout_name").selectmenu("disable");
+    $("#recaptcha_response_field").css({
+      "height": "20px"
+    });
+    var group = $("[id^=fieldset-]");
+    group.css({
+      "border": "1px solid #DDDDDD",
+      "margin-bottom": "10px"
+    });
+    group.find("legend").css({
+      "margin-left": "10px",
+      "color": "#444444",
+      "display": "block",
+      "font-family": "Helvetica,Arial,sans-serif",
+      "font-size": "12px",
+      "font-style": "normal",
+      "font-weight": "bold",
+      "padding": "0 0 2px",
+      "text-decoration": "none"
+    });
+    group.find("dd").css({
+      "margin-bottom": "10px"
+    });
+    group.find("dt").css({
+      "margin-left": "5px"
+    });
+    if (group.length) {
+    }
+    $("#page_until-element").parent("dl").after("<p style=\"margin-top:5px; margin-left:280px; width:400px; color:red; font-size:12px; font-weight:bold; text-decoration:underline;\">Koszt zeskanowania jednej strony wynosi 0,30 zł</p><div class=\"clear\"><div>");
+  });
+</script>
+<?php
+$aErrors = array();
+foreach ($this->element as $oElement) {
+  if (!in_array($oElement->getName(), array("seo_group", "chat_close_group", "journal_group", "not_valid"))) {
+    $aError = $oElement->getMessages();
+    if (is_array($aError) && count($aError) > 0) {
+      foreach ($aError as $sErrorText) {
+        $aErrors[] = "<p id=\"{$oElement->getName()}-error_text\"><strong>{$oElement->getLabel()}</strong><i>$sErrorText</i></p>";
+      }
+      $oElement->setAttrib("class", "field_error");
+    }
+  }
+}
+?>
+<div class="form_wrapper">
+  <div class="form_box">
+    <form class="form" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
+      <?php foreach ($this->element as $oElement): ?>
+        <?php if (!in_array($oElement->getName(), array("seo_group", "chat_close_group", "journal_group", "not_valid"))): ?>
+          <?php if ($oElement->getType() == "Zend_Form_Element_Hidden" || $oElement->getType() == "Zend_Form_Element_Hash"): ?>
+            <?php echo $oElement; ?>
+          <?php else: ?>
+            <dl><?php echo $oElement; ?></dl>
+          <?php endif; ?>
+        <?php else: ?>
+          <dl><?php echo $oElement; ?></dl>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </form>
+    <div id="legend">
+      <span id="req" class="pos_left"></span>
+      <span class="pos_left"><?php echo $this->translate("Pole obowiązkowe"); ?></span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

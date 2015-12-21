@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    var $edit_button = $(".edit_element");
+    var $delete_button = $(".delete_element");
+    $edit_button.bind("click", function () {
+      var $t = $(this).parent();
+      var value = $t.find($(".value"));
+      var keyword = {};
+      $("#keyword_edit_id").val($t.attr("id").split("_")[1]);
+      $.each(value.find("strong, span"), function (index, value) {
+        keyword[$(value).attr("class")] = $(value).html();
+      });
+      $("#value").val(keyword["name"]);
+    });
+    $delete_button.bind("click", function () {
+      var $t = $(this).parent();
+      dialog_confirm_delete.init($t);
+      dialog_confirm_delete.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_usuniecie_slowa_kluczowego"));
+    });
+  });
+</script>
+<?php echo $this->oFormKeywords; ?>
+<?php if (count($this->aAllKeywords)): ?>
+  <p class="keywords strong"><?php echo $this->translate("Słowa kluczowe"); ?> <span class="yellow"><?php echo $this->translate("ukryj"); ?></span></p>
+  <div id="keywords_wrapper">
+    <?php foreach ($this->aAllKeywords as $aValue): ?>
+      <p id="keyword_<?php echo $aValue["id"]; ?>">
+        <span class="value pos_left">
+          <strong class="name"><?php echo $aValue["value"]; ?></strong>
+        </span>
+        <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+        <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+      </p>
+      <div class="clear" style="margin-bottom:5px;"></div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>

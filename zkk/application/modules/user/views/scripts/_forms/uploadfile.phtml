@@ -1,0 +1,133 @@
+<div id="fileupload" class="container">
+  <form id="file_upload" action="<?php echo $this->param["action"]; ?>" method="POST" enctype="multipart/form-data">
+    <?php if (isset($this->param["input"])): ?>
+      <?php foreach ($this->param["input"] as $sInput): ?>
+        <?php echo $sInput; ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
+    <div class="fileupload-buttonbar">
+      <div>
+        <span class="btn_start fileinput-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+          <span>Przeglądaj...</span>
+          <input type="file" name="files[]" multiple>
+        </span>
+        <button type="submit" class="btn start">Start</button>
+        <button type="reset" class="btn cancel">Anuluj</button>
+      </div>
+      <div class="clear"></div>
+      <div class="fileupload-progress fade">
+        <div class="progress progress-success progress-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="bar" style="width:0%;"></div>
+        </div>
+        <div class="progress-extended">&nbsp;</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="fileupload-loading"></div>
+    <table role="presentation" class="table table-striped">
+      <thead>
+      <tr>
+        <th style="width:15%;"></th>
+        <th style="width:35%;"></th>
+        <th style="width:20%;"></th>
+        <th style="width:20%;"></th>
+        <th style="width:5%;"></th>
+        <th style="width:5%;"></th>
+      </tr>
+      </thead>
+      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+    </table>
+  </form>
+</div>
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  <tr class="template-upload fade">
+  <td class="preview_pdf">
+  <span class="fade"></span>
+  </td>
+  <td class="name">
+  <span>{%=file.name%}</span>
+  </td>
+  <td class="size">
+  <span>{%=o.formatFileSize(file.size)%}</span>
+  </td>
+  {% if (file.error) { %}
+  <td class="error" colspan="2">
+  <span class="label label-important">Error</span> 
+  {%=file.error%}
+  </td>
+  {% } else if (o.files.valid && !i) { %}
+  <td>
+  <div class="progress progress-success progress-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="bar" style="width:0%;"></div>
+  </div>
+  </td>
+  <td class="start">
+  {% if (!o.options.autoUpload) { %}
+  <button class="btn_start ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">Start</button>
+  {% } %}
+  </td>
+  {% } else { %}
+  <td colspan="2"></td>
+  {% } %}
+  <td class="cancel">
+  {% if (!i) { %}
+  <button class="btn_cancel ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">Anuluj</button>
+  {% } %}
+  </td>
+  </tr>
+  {% } %}
+
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  <tr class="template-download fade">
+  {% if (file.error) { %}
+  <td></td>
+  <td class="name">
+  <span>{%=file.name%}</span>
+  </td>
+  <td class="size">
+  <span>{%=o.formatFileSize(file.size)%}</span>
+  </td>
+  <td class="error" colspan="2">
+  <span class="label label-important">Error</span> {%=file.error%}
+  </td>
+  {% } else { %}
+  <td class="preview_pdf">
+  {% if (file.thumbnail_url) { %}
+  <a target="_blank" href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}">
+  <img src="{%=file.thumbnail_url%}">
+  </a>
+  {% } %}
+  </td>
+  <td class="name">
+  <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+  </td>
+  <td class="size">
+  <span>{%=o.formatFileSize(file.size)%}</span>
+  </td>
+  <td colspan="2"></td>
+  {% } %}
+  <td></td>
+  </tr>
+  {% } %}
+
+</script>
+<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="/js/fileupload/tmpl.min.js"></script>
+<script src="/js/fileupload/load-image.min.js"></script>
+<script src="/js/fileupload/canvas-to-blob.min.js"></script>
+<script src="/js/fileupload/jquery.iframe-transport.js"></script>
+<script src="/js/fileupload/jquery.fileupload.js"></script>
+<script src="/js/fileupload/jquery.fileupload-fp.js"></script>
+<script src="/js/fileupload/jquery.fileupload-ui.js"></script>
+<script src="/js/fileupload/main.js"></script>
+<script src="/js/jquery/jquery.prettyPhoto.js"></script>
+<script src="/js/jquery/jquery.zend.jsonrpc.js"></script>
+<script src="/js/jquery-ui/jquery.ui.selectmenu.js"></script>
+<script src="/js/jquery/jquery.actual.js"></script>
+<script src="/js/ajax_overlay.js"></script>

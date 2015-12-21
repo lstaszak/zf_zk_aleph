@@ -1,0 +1,12 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    dialog_msg.init();
+    if ($("#success").html() === "OK") {
+      dialog_msg.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_sukces_operacja"));
+    } else if ($("#success").html() === "NO OK") {
+      dialog_msg.error();
+    }
+  });
+</script>
+<?php echo $this->oFormTrancateDb; ?>
+<div id="success"><?php echo $this->sSuccess; ?></div>

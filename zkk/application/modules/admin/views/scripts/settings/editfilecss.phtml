@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    SyntaxHighlighter.highlight("code");
+    var file_name = "<?php echo $this->sFileName; ?>";
+    $("#file_name").selectmenu("value", file_name);
+    var $edit_file_btn = $("<button id=\"edit_file_btn\" class=\"pos_left\">" + translator.get("btn_edytuj") + "</button>").bind("click",function () {
+      if (!$("#file_css_textarea").length) {
+        $edit_file_btn.hide();
+        $save_file_btn.show();
+        var code;
+        for (var key in SyntaxHighlighter.vars.highlighters) {
+          code = SyntaxHighlighter.vars.highlighters[key].code;
+        }
+        var $file_css = $("#file_css").empty().hide();
+        var $textarea = $("<textarea id=\"file_css_textarea\"></textarea>");
+        $textarea.insertBefore($file_css);
+        $("<div class=\"clear\"></div>").insertAfter("#file_css_textarea");
+        $textarea.css({
+          "width": "755px",
+          "height": "600px",
+          "font-size": "11px"
+        });
+        $textarea.val(code);
+      }
+    }).button().css({
+      "margin-top": "5px"
+    });
+    var $save_file_btn = $("<button id=\"save_file_btn\" class=\"pos_left\">" + translator.get("btn_zapisz") + "</button>").bind("click",function () {
+      var selected_file_css = $("#file_name").find("option:selected").html();
+      var file_css = $("#file_css_textarea").val();
+      var data = {};
+      data["file_name"] = selected_file_css;
+      data["file_css"] = file_css;
+      $.ajax({
+        url: baseurl + "/admin/settings/savefilecss",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        success: function (resp) {
+          window.open(baseurl + "/admin/settings/editfilecss", "_self");
+        },
+        error: function (resp) {
+
+        }
+      });
+    }).button().css({
+      "margin-top": "5px",
+      "margin-bottom": "5px"
+    });
+    $edit_file_btn.insertBefore("#file_css");
+    $save_file_btn.insertBefore("#file_css").hide();
+    $("<div class=\"clear\"></div>").insertAfter($("#" + $edit_file_btn.attr("id")));
+  });
+</script>
+<?php echo $this->oFormFileCss; ?>
+<div class="clear"></div>
+<pre name="code" id="file_css" class="brush:css;"><?php echo $this->sFileContent; ?></pre>

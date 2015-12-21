@@ -1,0 +1,62 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".strong").eq(0).css({
+      "margin-top": "0px"
+    }).trigger("click");
+    $("#variable_wrapper").css("margin-bottom", "10px").find("span").css("cursor", "pointer");
+    var $edit_button = $(".edit_element");
+    var $delete_button = $(".delete_element");
+    $edit_button.on("click", function () {
+      var $t = $(this).parents(".order_email_notification_issue");
+      var order_email_notification_id = $t.data("id");
+      var order_status_id_old = parseInt($t.data("order_status_id_old"));
+      var order_status_id_new = parseInt($t.data("order_status_id_new"));
+      var notification_subject = $t.find(".notification_subject p").html();
+      var notification = $t.find(".notification").html();
+      var apprise_borrower = parseInt($t.data("apprise_borrower"));
+      var apprise_librarian = parseInt($t.data("apprise_librarian"));
+      $("#apprise_borrower, #apprise_librarian").prop("checked", false);
+      if (apprise_borrower === 1) {
+        $("#apprise_borrower").prop("checked", true);
+      }
+      if (apprise_librarian === 1) {
+        $("#apprise_librarian").prop("checked", true);
+      }
+      $("#order_email_notification_edit_id").val(order_email_notification_id);
+      $("#order_status_id_old").selectmenu("value", order_status_id_old);
+      $("#order_status_id_new").selectmenu("value", order_status_id_new);
+      $("#notification_subject").val(notification_subject);
+      CKEDITOR.instances["notification"].setData(notification);
+      $("html, body").animate({scrollTop: 0}, "slow");
+    });
+    $delete_button.on("click", function () {
+      var $t = $(this).parents(".order_email_notification_issue");
+      dialog_confirm_delete.init($t);
+      dialog_confirm_delete.display(translator.get("dialog_potwierdzenie"), translator.get("dialog_usuniecie_powiadomienie_email"));
+    });
+  });
+</script>
+<?php echo $this->oFormOrderEmailNotification; ?>
+<br/>
+<?php if (count($this->aAllOrderEmailNotification)): ?>
+  <div id="order_email_notification_wrapper">
+    <ul class="order_email_notification_issue_order">
+      <?php foreach ($this->aAllOrderEmailNotification as $aValue): ?>
+        <li class="order_email_notification_issue" id="orderemailnotification_<?php echo $aValue["id"]; ?>" data-id="<?php echo $aValue["id"]; ?>" data-order_status_id_old="<?php echo $aValue["order_status_id_old"]; ?>" data-order_status_id_new="<?php echo $aValue["order_status_id_new"]; ?>" data-apprise_borrower="<?php echo $aValue["apprise_borrower"]; ?>"
+            data-apprise_librarian="<?php echo $aValue["apprise_librarian"]; ?>" style="border:1px solid #dddddd; margin-bottom:10px; background-color:#f0f0f0;">
+          <div class="order_status_name">
+            <strong><?php echo $aValue["order_status_id_old_name"]; ?> / <?php echo $aValue["order_status_id_new_name"]; ?> [<?php echo $aValue["order_status_id_old"]; ?> / <?php echo $aValue["order_status_id_new"]; ?>]</strong>
+            <span class="delete_element pos_right" <?php echo $this->translate("Usuń"); ?>></span>
+            <span class="edit_element pos_right" <?php echo $this->translate("Zmień"); ?>></span>
+          </div>
+          <div class="notification_subject ui-state-default">
+            <p><?php echo $aValue["notification_subject"]; ?></p>
+          </div>
+          <div class="notification ui-state-default">
+            <?php echo $aValue["notification"]; ?>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+<?php endif; ?>

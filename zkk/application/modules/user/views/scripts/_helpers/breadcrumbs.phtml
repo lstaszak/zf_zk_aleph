@@ -1,0 +1,6 @@
+<?php if (is_string($this->oBreadcrumbs) && strlen($this->oBreadcrumbs) > 0): ?>
+  <p>
+    <span><?php echo $this->translate("Jesteś tutaj:") ?> <a href="<?php echo $this->url(array("controller" => "index", "action" => "index", "module" => $this->sModuleName), null, true) ?>"><?php echo $this->sModuleName == "default" ? "x" : ""; ?></a></span>
+    <span><?php echo $this->oBreadcrumbs; ?></span>
+  </p>
+<?php endif; ?>

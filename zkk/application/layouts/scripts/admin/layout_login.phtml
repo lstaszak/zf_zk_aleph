@@ -1,0 +1,30 @@
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+  <?php echo $this->loadSkin("admin"); ?>
+  <?php echo $this->headMeta(); ?>
+  <?php echo $this->headTitle(); ?>
+  <?php echo $this->headScript(); ?>
+  <?php echo $this->headLink(); ?>
+  <?php echo $this->googleAnalytics(); ?>
+</head>
+<body>
+<div id="container">
+  <header>
+    <div id="user_box">
+      <?php echo $this->userInfo(); ?>
+    </div>
+  </header>
+  <section id="breadcrumbs">
+    <?php //echo $this->loadBreadcrumbs(); ?>
+  </section>
+  <section id="left_menu">
+    <?php //echo $this->loadSubMenu(1, "subnav"); ?>
+  </section>
+  <section id="content">
+    <?php echo $this->layout()->content ?>
+  </section>
+  <footer></footer>
+</div>
+</body>
+</html>

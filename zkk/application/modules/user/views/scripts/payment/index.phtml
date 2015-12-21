@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".strong").eq(0).css({
+      "margin-top": "0px"
+    });
+    table_payments.init("user", 0);
+  });
+</script>
+<div id="order_payment_wrapper">
+  <table id="order_payment" class="paginated" style="display:none">
+    <thead>
+    <tr id="sort_able">
+      <th data-id="order_payment_id" data-width="15" data-col_name="order_payment_id" class="sort">
+        <span class="pos_left"><?php echo $this->translate("Nr płatności"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th data-id="order_payment_total_amount" data-width="15" data-col_name="order_payment_total_amount" class="sort">
+        <span class="pos_left"><?php echo $this->translate("Suma"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th data-id="date_is_starting" data-width="20" data-col_name="date_is_starting" class="sort">
+        <span class="pos_left"><?php echo $this->translate("Data rozpoczęcia transakcji"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th data-id="date_is_ending" data-width="20" data-col_name="date_is_ending" class="sort">
+        <span class="pos_left"><?php echo $this->translate("Data zaksięgowania transakcji"); ?></span>
+        <span class="pos_left sort_arrow"></span>
+      </th>
+      <th data-width="15">
+        <span class="pos_left"><?php echo $this->translate("Metoda płatności"); ?></span>
+      </th>
+      <th data-width="15">
+        <span class="pos_left"><?php echo $this->translate("Status transakcji"); ?></span>
+      </th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<div id="dialog_order_payment_details" title=""></div>

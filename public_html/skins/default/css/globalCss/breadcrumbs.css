@@ -1,0 +1,25 @@
+#breadcrumbs {
+  padding-left:28px;
+  padding-top:10px;
+}
+#breadcrumbs p, #breadcrumbs a, #breadcrumbs span {
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:11px;
+  line-height:150%;
+  text-align:justify;
+  color:#296790;
+  text-align:left;
+  margin-top:0px;
+  margin-left:0px;
+  margin-right:0px;
+  font-weight:normal;
+}
+#breadcrumbs a:hover {
+  text-decoration:underline;
+}
+#breadcrumbs span.breadcrumbs_spacer {
+  display:inline-block;
+  margin:-2px 5px 0;
+  vertical-align:middle;
+  width:5px;
+}
