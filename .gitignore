@@ -1,3 +1,7 @@
+.idea
 /zkk/application/configs
 library/zkk/AppCms2/Controller
 library/zkk/AppCms2/Payments
+library/Zend
+library/ZendX
+library/Facebook
