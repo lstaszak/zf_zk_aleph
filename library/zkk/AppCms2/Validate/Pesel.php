@@ -2,9 +2,11 @@
 
 class AppCms2_Validate_Pesel extends Zend_Validate_Abstract
 {
+
   const LENGTH = 'numLength';
   const CHECKSUM = 'numChecksum';
   const SYBASE = 'sybase';
+
   protected static $_filter = null;
   protected $_messageTemplates = array(
     self::LENGTH => "'%value%' must contain 11 digits",
@@ -51,6 +53,7 @@ class AppCms2_Validate_Pesel extends Zend_Validate_Abstract
     }
     return true;
   }
+
 }
 
 ?>

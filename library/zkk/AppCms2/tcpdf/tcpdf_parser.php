@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : tcpdf_parser.php
 // Version     : 1.0.001
@@ -31,6 +32,7 @@
 // Description : This is a PHP class for parsing PDF documents.
 //
 //============================================================+
+
 /**
  * @file
  * This is a PHP class for parsing PDF documents.<br>
@@ -51,27 +53,33 @@ require_once(dirname(__FILE__) . '/tcpdf_filters.php');
  */
 class TCPDF_PARSER
 {
+
   /**
    * Raw content of the PDF document.
    * @private
    */
   private $pdfdata = '';
+
   /**
    * XREF data.
    * @protected
    */
   protected $xref = array();
+
   /**
    * Array of PDF objects.
    * @protected
    */
   protected $objects = array();
+
   /**
    * Class object for decoding filters.
    * @private
    */
   private $FilterDecoders;
+
 // -----------------------------------------------------------------------------
+
   /**
    * Parse a PDF document an return an array of objects.
    *
@@ -119,7 +127,7 @@ class TCPDF_PARSER
    * Get xref (cross-reference table) and trailer data from PDF document data.
    *
    * @param $offset (int) xref offset (if know).
-   * @param $xref (array) previous xref array (if any).
+   * @param $xref   (array) previous xref array (if any).
    *
    * @return Array containing xref and trailer data.
    * @protected
@@ -224,7 +232,8 @@ class TCPDF_PARSER
     $char = $this->pdfdata{$offset};
     // get object type
     switch ($char) {
-      case '%': { // \x25 PERCENT SIGN
+      case '%':
+      { // \x25 PERCENT SIGN
         // skip comment and search for next token
         $next = strcspn($this->pdfdata, "\r\n", $offset);
         if ($next > 0) {
@@ -233,7 +242,8 @@ class TCPDF_PARSER
         }
         break;
       }
-      case '/': { // \x2F SOLIDUS
+      case '/':
+      { // \x2F SOLIDUS
         // name object
         $objtype = $char;
         ++$offset;
@@ -244,7 +254,8 @@ class TCPDF_PARSER
         break;
       }
       case '(': // \x28 LEFT PARENTHESIS
-      case ')': { // \x29 RIGHT PARENTHESIS
+      case ')':
+      { // \x29 RIGHT PARENTHESIS
         // literal string object
         $objtype = $char;
         ++$offset;
@@ -257,16 +268,19 @@ class TCPDF_PARSER
             }
             $ch = $this->pdfdata{$strpos};
             switch ($ch) {
-              case '\\': { // REVERSE SOLIDUS (5Ch) (Backslash)
+              case '\\':
+              { // REVERSE SOLIDUS (5Ch) (Backslash)
                 // skip next character
                 ++$strpos;
                 break;
               }
-              case '(': { // LEFT PARENHESIS (28h)
+              case '(':
+              { // LEFT PARENHESIS (28h)
                 ++$open_bracket;
                 break;
               }
-              case ')': { // RIGHT PARENTHESIS (29h)
+              case ')':
+              { // RIGHT PARENTHESIS (29h)
                 --$open_bracket;
                 break;
               }
@@ -279,7 +293,8 @@ class TCPDF_PARSER
         break;
       }
       case '[': // \x5B LEFT SQUARE BRACKET
-      case ']': { // \x5D RIGHT SQUARE BRACKET
+      case ']':
+      { // \x5D RIGHT SQUARE BRACKET
         // array object
         $objtype = $char;
         ++$offset;
@@ -298,7 +313,8 @@ class TCPDF_PARSER
         break;
       }
       case '<': // \x3C LESS-THAN SIGN
-      case '>': { // \x3E GREATER-THAN SIGN
+      case '>':
+      { // \x3E GREATER-THAN SIGN
         if (isset($this->pdfdata{($offset + 1)}) AND ($this->pdfdata{($offset + 1)} == $char)) {
           // dictionary object
           $objtype = $char . $char;
@@ -326,7 +342,8 @@ class TCPDF_PARSER
         }
         break;
       }
-      default: {
+      default:
+        {
         if (substr($this->pdfdata, $offset, 6) == 'endobj') {
           // indirect object
           $objtype = 'endobj';
@@ -375,7 +392,7 @@ class TCPDF_PARSER
           $offset += $numlen;
         }
         break;
-      }
+        }
     }
     return array($objtype, $objval, $offset);
   }
@@ -383,8 +400,8 @@ class TCPDF_PARSER
   /**
    * Get content of indirect object.
    *
-   * @param $obj_ref (string) Object number and generation number separated by underscore character.
-   * @param $offset (int) Object offset.
+   * @param $obj_ref  (string) Object number and generation number separated by underscore character.
+   * @param $offset   (int) Object offset.
    * @param $decoding (boolean) If true decode streams.
    *
    * @return array containing object data.
@@ -453,7 +470,7 @@ class TCPDF_PARSER
   /**
    * Decode the specified stream.
    *
-   * @param $sdic (array) Stream's dictionary array.
+   * @param $sdic   (array) Stream's dictionary array.
    * @param $stream (string) Stream to decode.
    *
    * @return array containing decoded stream data and remaining filters.
@@ -517,9 +534,11 @@ class TCPDF_PARSER
     // exit program and print error
     die('<strong>TCPDF_PARSER ERROR: </strong>' . $msg);
   }
+
 }
 
 // END OF TCPDF_PARSER CLASS
+
 //============================================================+
 // END OF FILE
 //============================================================+

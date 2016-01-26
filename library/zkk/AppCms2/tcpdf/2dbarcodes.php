@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : 2dbarcodes.php
 // Version     : 1.0.014
@@ -31,6 +32,7 @@
 //               2D barcodes to be used with TCPDF.
 //
 //============================================================+
+
 /**
  * @file
  * PHP class to creates array representations for 2D barcodes to be used with TCPDF.
@@ -48,6 +50,7 @@
  */
 class TCPDF2DBarcode
 {
+
   /**
    * Array representation of barcode.
    * @protected
@@ -82,8 +85,8 @@ class TCPDF2DBarcode
   /**
    * Send barcode as SVG image object to the standard output.
    *
-   * @param $w (int) Width of a single rectangle element in user units.
-   * @param $h (int) Height of a single rectangle element in user units.
+   * @param $w     (int) Width of a single rectangle element in user units.
+   * @param $h     (int) Height of a single rectangle element in user units.
    * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
    *
    * @public
@@ -105,8 +108,8 @@ class TCPDF2DBarcode
   /**
    * Return a SVG string representation of barcode.
    *
-   * @param $w (int) Width of a single rectangle element in user units.
-   * @param $h (int) Height of a single rectangle element in user units.
+   * @param $w     (int) Width of a single rectangle element in user units.
+   * @param $h     (int) Height of a single rectangle element in user units.
    * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
    *
    * @return string SVG code.
@@ -144,8 +147,8 @@ class TCPDF2DBarcode
   /**
    * Return an HTML representation of barcode.
    *
-   * @param $w (int) Width of a single rectangle element in pixels.
-   * @param $h (int) Height of a single rectangle element in pixels.
+   * @param $w     (int) Width of a single rectangle element in pixels.
+   * @param $h     (int) Height of a single rectangle element in pixels.
    * @param $color (string) Foreground color for bar elements (background is transparent).
    *
    * @return string HTML code.
@@ -176,8 +179,8 @@ class TCPDF2DBarcode
   /**
    * Return a PNG image representation of barcode (requires GD or Imagick library).
    *
-   * @param $w (int) Width of a single rectangle element in pixels.
-   * @param $h (int) Height of a single rectangle element in pixels.
+   * @param $w     (int) Width of a single rectangle element in pixels.
+   * @param $h     (int) Height of a single rectangle element in pixels.
    * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
    *
    * @return image or false in case of error.
@@ -253,14 +256,16 @@ class TCPDF2DBarcode
     $mode = explode(',', $type);
     $qrtype = strtoupper($mode[0]);
     switch ($qrtype) {
-      case 'DATAMATRIX': { // DATAMATRIX (ISO/IEC 16022)
+      case 'DATAMATRIX':
+      { // DATAMATRIX (ISO/IEC 16022)
         require_once(dirname(__FILE__) . '/datamatrix.php');
         $qrcode = new Datamatrix($code);
         $this->barcode_array = $qrcode->getBarcodeArray();
         $this->barcode_array['code'] = $code;
         break;
       }
-      case 'PDF417': { // PDF417 (ISO/IEC 15438:2006)
+      case 'PDF417':
+      { // PDF417 (ISO/IEC 15438:2006)
         require_once(dirname(__FILE__) . '/pdf417.php');
         if (!isset($mode[1]) OR ($mode[1] === '')) {
           $aspectratio = 2; // default aspect ratio (width / height)
@@ -291,7 +296,8 @@ class TCPDF2DBarcode
         $this->barcode_array['code'] = $code;
         break;
       }
-      case 'QRCODE': { // QR-CODE
+      case 'QRCODE':
+      { // QR-CODE
         require_once(dirname(__FILE__) . '/qrcode.php');
         if (!isset($mode[1]) OR (!in_array($mode[1], array('L', 'M', 'Q', 'H')))) {
           $mode[1] = 'L'; // Ddefault: Low error correction
@@ -302,7 +308,8 @@ class TCPDF2DBarcode
         break;
       }
       case 'RAW':
-      case 'RAW2': { // RAW MODE
+      case 'RAW2':
+      { // RAW MODE
         // remove spaces
         $code = preg_replace('/[\s]*/si', '', $code);
         if (strlen($code) < 3) {
@@ -325,7 +332,8 @@ class TCPDF2DBarcode
         $this->barcode_array['code'] = $code;
         break;
       }
-      case 'TEST': { // TEST MODE
+      case 'TEST':
+      { // TEST MODE
         $this->barcode_array['num_rows'] = 5;
         $this->barcode_array['num_cols'] = 15;
         $this->barcode_array['bcode'] = array(
@@ -337,14 +345,17 @@ class TCPDF2DBarcode
         $this->barcode_array['code'] = $code;
         break;
       }
-      default: {
+      default:
+        {
         $this->barcode_array = false;
-      }
+        }
     }
   }
+
 }
 
 // end of class
+
 //============================================================+
 // END OF FILE
 //============================================================+

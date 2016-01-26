@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_UserRole extends Zend_Validate_Abstract
 {
+
   const IS_EXIST = "notMatch";
+
   protected $_messageTemplates = array(
     self::IS_EXIST => "Kategoria użytkownika o takiej nazwie już istnieje"
   );
@@ -21,4 +23,5 @@ class AppCms2_Validate_UserRole extends Zend_Validate_Abstract
     $this->_error(self::IS_EXIST);
     return false;
   }
+
 }

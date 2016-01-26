@@ -18,9 +18,11 @@ $cidinfo = array(
   'Supplement' => '1',
 );
 $enc = 'UniKS-UCS2-H';
+
 // underline position, needs checking:
 $up = -130;
 $ut = 40;
+
 $dw = 1000;
 $cw = array(
   32 => 333, 33 => 416, 34 => 416, 35 => 833, 36 => 625, 37 => 916, 38 => 833, 39 => 250, 40 => 500, 41 => 500,

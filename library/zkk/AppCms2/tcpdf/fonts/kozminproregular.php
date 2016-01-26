@@ -1,4 +1,5 @@
 <?php
+
 $type = 'cidfont0';
 $name = 'KozMinPro-Regular-Acro';
 $displayname = 'Kozuka Mincho Pro (Japanese Serif)';
@@ -18,8 +19,10 @@ $cidinfo = array(
   'Supplement' => '4',
 );
 $enc = 'UniJIS-UCS2-H';
+
 $up = -75;
 $ut = 50;
+
 $dw = 1000;
 $cw = array(
   32 => 278, 33 => 299, 34 => 353, 35 => 614, 36 => 614, 37 => 721, 38 => 735, 39 => 216, 40 => 323, 41 => 323,

@@ -2,6 +2,7 @@
 
 class AppCms2_Debug
 {
+
   protected static $_instance = null;
   protected static $_db = null;
 
@@ -22,6 +23,7 @@ class AppCms2_Debug
       $oLogger->log($mParameter, Zend_Log::INFO);
     }
   }
+
 }
 
 ?>

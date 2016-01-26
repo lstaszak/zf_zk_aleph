@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : tcpdf_filters.php
 // Version     : 1.0.000
@@ -31,6 +32,7 @@
 // Description : This is a PHP class for decoding common PDF filters (PDF 32000-2008 - 7.4 Filters).
 //
 //============================================================+
+
 /**
  * @file
  * This is a PHP class for decoding common PDF filters (PDF 32000-2008 - 7.4 Filters).<br>
@@ -49,12 +51,15 @@
  */
 class TCPDF_FILTERS
 {
+
   /**
    * Define a list of available filter decoders.
    * @private
    */
   private $available_filters = array('ASCIIHexDecode', 'ASCII85Decode', 'LZWDecode', 'FlateDecode', 'RunLengthDecode');
+
 // -----------------------------------------------------------------------------
+
   /**
    * Get a list of available decoding filters.
    * @return (array) Array of available filter decoders.
@@ -70,7 +75,7 @@ class TCPDF_FILTERS
    * Decode data using the specified filter type.
    *
    * @param $filter (string) Filter name.
-   * @param $data (string) Data to decode.
+   * @param $data   (string) Data to decode.
    *
    * @return Decoded data string.
    * @public
@@ -79,54 +84,66 @@ class TCPDF_FILTERS
   public function decodeFilter($filter, $data)
   {
     switch ($filter) {
-      case 'ASCIIHexDecode': {
+      case 'ASCIIHexDecode':
+      {
         return $this->decodeFilterASCIIHexDecode($data);
         break;
       }
-      case 'ASCII85Decode': {
+      case 'ASCII85Decode':
+      {
         return $this->decodeFilterASCII85Decode($data);
         break;
       }
-      case 'LZWDecode': {
+      case 'LZWDecode':
+      {
         return $this->decodeFilterLZWDecode($data);
         break;
       }
-      case 'FlateDecode': {
+      case 'FlateDecode':
+      {
         return $this->decodeFilterFlateDecode($data);
         break;
       }
-      case 'RunLengthDecode': {
+      case 'RunLengthDecode':
+      {
         return $this->decodeFilterRunLengthDecode($data);
         break;
       }
-      case 'CCITTFaxDecode': {
+      case 'CCITTFaxDecode':
+      {
         return $this->decodeFilterCCITTFaxDecode($data);
         break;
       }
-      case 'JBIG2Decode': {
+      case 'JBIG2Decode':
+      {
         return $this->decodeFilterJBIG2Decode($data);
         break;
       }
-      case 'DCTDecode': {
+      case 'DCTDecode':
+      {
         return $this->decodeFilterDCTDecode($data);
         break;
       }
-      case 'JPXDecode': {
+      case 'JPXDecode':
+      {
         return $this->decodeFilterJPXDecode($data);
         break;
       }
-      case 'Crypt': {
+      case 'Crypt':
+      {
         return $this->decodeFilterCrypt($data);
         break;
       }
-      default: {
+      default:
+        {
         return decodeFilterStandard($data);
         break;
-      }
+        }
     }
   }
 
   // --- FILTERS (PDF 32000-2008 - 7.4 Filters) ------------------------------
+
   /**
    * Standard
    * Default decoding filter (leaves data unchanged).
@@ -252,19 +269,23 @@ class TCPDF_FILTERS
     }
     // last tuple (if any)
     switch ($group_pos) {
-      case 4: {
+      case 4:
+      {
         $decoded .= chr($tuple >> 24) . chr($tuple >> 16) . chr($tuple >> 8);
         break;
       }
-      case 3: {
+      case 3:
+      {
         $decoded .= chr($tuple >> 24) . chr($tuple >> 16);
         break;
       }
-      case 2: {
+      case 2:
+      {
         $decoded .= chr($tuple >> 24);
         break;
       }
-      case 1: {
+      case 1:
+      {
         $this->Error('decodeASCII85: invalid code');
         break;
       }
@@ -491,6 +512,7 @@ class TCPDF_FILTERS
   }
 
   // --- END FILTERS SECTION -------------------------------------------------
+
   /**
    * This method is automatically called in case of fatal error; it simply outputs the message and halts the execution.
    *
@@ -504,9 +526,11 @@ class TCPDF_FILTERS
     // exit program and print error
     die('<strong>TCPDF_FILTERS ERROR: </strong>' . $msg);
   }
+
 }
 
 // END OF TCPDF_FILTERS CLASS
+
 //============================================================+
 // END OF FILE
 //============================================================+

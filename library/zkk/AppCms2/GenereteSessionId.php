@@ -2,6 +2,7 @@
 
 class AppCms2_GenereteSessionId
 {
+
   private $_nPasswordLength = 300;
   private $_bUseSpecialChars = true;
   private $_bUseLowercaseLetters = true;
@@ -99,6 +100,7 @@ class AppCms2_GenereteSessionId
       "session_id" => md5($sSessionId),
     );
   }
+
 }
 
 ?>

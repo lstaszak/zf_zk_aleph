@@ -2,6 +2,7 @@
 
 class AppCms2_Validate_SpecialAlpha extends Zend_Validate_Abstract
 {
+
   public function isValid($sValue)
   {
     $sValue = preg_replace("/_/", " ", $sValue);
@@ -10,6 +11,7 @@ class AppCms2_Validate_SpecialAlpha extends Zend_Validate_Abstract
       return true;
     return false;
   }
+
 }
 
 ?>

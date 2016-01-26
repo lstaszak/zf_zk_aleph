@@ -1,4 +1,5 @@
 <?php
+
 $type = 'cidfont0';
 $name = 'MSungStd-Light-Acro';
 $displayname = 'MSung Light (Trad. Chinese)';
@@ -17,8 +18,10 @@ $cidinfo = array(
   'Supplement' => '3',
 );
 $enc = 'UniCNS-UCS2-H';
+
 $up = -130;
 $ut = 40;
+
 $dw = 1000;
 $cw = array(
   32 => 250, 33 => 250, 34 => 408, 35 => 668, 36 => 490, 37 => 875, 38 => 698, 39 => 250, 40 => 240, 41 => 240,

@@ -2,6 +2,7 @@
 
 class AppCms2_Imagick extends Imagick
 {
+
   private $nWidth = 0;
   private $nHeight = 0;
   private $sMimeType = '';
@@ -21,6 +22,7 @@ class AppCms2_Imagick extends Imagick
   {
     parent::__construct($option);
   }
+
 }
 
 ?>

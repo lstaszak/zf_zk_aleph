@@ -2,6 +2,7 @@
 
 class AppCms2_ImageAddTo
 {
+
   private $_oAuth, $_nUserId = null;
 
   public function __construct()
@@ -28,6 +29,7 @@ class AppCms2_ImageAddTo
     }
     return null;
   }
+
 }
 
 ?>

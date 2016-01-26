@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : datamatrix.php
 // Version     : 1.0.004
@@ -32,6 +33,7 @@
 // Class to create DataMatrix ECC 200 barcode arrays for TCPDF class.
 // DataMatrix (ISO/IEC 16022:2006) is a 2-dimensional bar code.
 //============================================================+
+
 /**
  * @file
  * Class to create DataMatrix ECC 200 barcode arrays for TCPDF class.
@@ -43,41 +45,52 @@
  */
 // custom definitions
 if (!defined('DATAMATRIXDEFS')) {
+
   /**
    * Indicate that definitions for this class are set
    */
   define('DATAMATRIXDEFS', true);
+
   // -----------------------------------------------------
 } // end of custom definitions
 // #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+
+
 /**
  * ASCII encoding: ASCII character 0 to 127 (1 byte per CW)
  */
 define('ENC_ASCII', 0);
+
 /**
  * C40 encoding: Upper-case alphanumeric (3/2 bytes per CW)
  */
 define('ENC_C40', 1);
+
 /**
  * TEXT encoding: Lower-case alphanumeric (3/2 bytes per CW)
  */
 define('ENC_TXT', 2);
+
 /**
  * X12 encoding: ANSI X12 (3/2 byte per CW)
  */
 define('ENC_X12', 3);
+
 /**
  * EDIFACT encoding: ASCII character 32 to 94 (4/3 bytes per CW)
  */
 define('ENC_EDF', 4);
+
 /**
  * BASE 256 encoding: ASCII character 0 to 255 (1 byte per CW)
  */
 define('ENC_BASE256', 5);
+
 /**
  * ASCII extended encoding: ASCII character 128 to 255 (1/2 byte per CW)
  */
 define('ENC_ASCII_EXT', 6);
+
 /**
  * ASCII number encoding: ASCII digits (2 bytes per CW)
  */
@@ -94,16 +107,19 @@ define('ENC_ASCII_NUM', 7);
  */
 class Datamatrix
 {
+
   /**
    * Barcode array to be returned which is readable by TCPDF.
    * @protected
    */
   protected $barcode_array = array();
+
   /**
    * Store last used encoding for data codewords.
    * @protected
    */
   protected $last_enc = ENC_ASCII;
+
   /**
    * Table of Data Matrix ECC 200 Symbol Attributes:<ul>
    * <li>total matrix rows (including finder pattern)</li>
@@ -159,11 +175,13 @@ class Datamatrix
     array(0x010, 0x024, 0x00e, 0x020, 0x010, 0x012, 0x00e, 0x010, 0x001, 0x002, 0x002, 0x020, 0x018, 0x001, 0x020, 0x018), // 16x36
     array(0x010, 0x030, 0x00e, 0x02c, 0x010, 0x018, 0x00e, 0x016, 0x001, 0x002, 0x002, 0x031, 0x01c, 0x001, 0x031, 0x01c) // 16x48
   );
+
   /**
    * Map encodation modes whit character sets.
    * @protected
    */
   protected $chset_id = array(ENC_C40 => 'C40', ENC_TXT => 'TXT', ENC_X12 => 'X12');
+
   /**
    * Basic set of characters for each encodation mode.
    * @protected
@@ -204,7 +222,9 @@ class Datamatrix
       0x47 => 0x14, 0x48 => 0x15, 0x49 => 0x16, 0x4a => 0x17, 0x4b => 0x18, 0x4c => 0x19, 0x4d => 0x1a, 0x4e => 0x1b, 0x4f => 0x1c, 0x50 => 0x1d, //
       0x51 => 0x1e, 0x52 => 0x1f, 0x53 => 0x20, 0x54 => 0x21, 0x55 => 0x22, 0x56 => 0x23, 0x57 => 0x24, 0x58 => 0x25, 0x59 => 0x26, 0x5a => 0x27) //
   );
+
 // -----------------------------------------------------------------------------
+
   /**
    * This is the class constructor.
    * Creates a datamatrix object
@@ -337,11 +357,11 @@ class Datamatrix
   /**
    * Product of two numbers in a Power-of-Two Galois Field
    *
-   * @param $a (int) first number to multiply.
-   * @param $b (int) second number to multiply.
-   * @param $log (array) Log table.
+   * @param $a    (int) first number to multiply.
+   * @param $b    (int) second number to multiply.
+   * @param $log  (array) Log table.
    * @param $alog (array) Anti-Log table.
-   * @param $gf (array) Number of Factors of the Reed-Solomon polynomial.
+   * @param $gf   (array) Number of Factors of the Reed-Solomon polynomial.
    *
    * @return int product
    * @protected
@@ -462,7 +482,7 @@ class Datamatrix
   /**
    * Returns true if the char belongs to the selected mode
    *
-   * @param $chr (int) Character (byte) to check.
+   * @param $chr  (int) Character (byte) to check.
    * @param $mode (int) Current encoding mode.
    *
    * @return boolean true if the char is of the selected mode.
@@ -472,35 +492,43 @@ class Datamatrix
   {
     $status = false;
     switch ($mode) {
-      case ENC_ASCII: { // ASCII character 0 to 127
+      case ENC_ASCII:
+      { // ASCII character 0 to 127
         $status = (($chr >= 0) AND ($chr <= 127));
         break;
       }
-      case ENC_C40: { // Upper-case alphanumeric
+      case ENC_C40:
+      { // Upper-case alphanumeric
         $status = (($chr == 32) OR (($chr >= 48) AND ($chr <= 57)) OR (($chr >= 65) AND ($chr <= 90)));
         break;
       }
-      case ENC_TXT: { // Lower-case alphanumeric
+      case ENC_TXT:
+      { // Lower-case alphanumeric
         $status = (($chr == 32) OR (($chr >= 48) AND ($chr <= 57)) OR (($chr >= 97) AND ($chr <= 122)));
         break;
       }
-      case ENC_X12: { // ANSI X12
+      case ENC_X12:
+      { // ANSI X12
         $status = (($chr == 13) OR ($chr == 42) OR ($chr == 62));
         break;
       }
-      case ENC_EDF: { // ASCII character 32 to 94
+      case ENC_EDF:
+      { // ASCII character 32 to 94
         $status = (($chr >= 32) AND ($chr <= 94));
         break;
       }
-      case ENC_BASE256: { // Function character (FNC1, Structured Append, Reader Program, or Code Page)
+      case ENC_BASE256:
+      { // Function character (FNC1, Structured Append, Reader Program, or Code Page)
         $status = (($chr == 232) OR ($chr == 233) OR ($chr == 234) OR ($chr == 241));
         break;
       }
-      case ENC_ASCII_EXT: { // ASCII character 128 to 255
+      case ENC_ASCII_EXT:
+      { // ASCII character 128 to 255
         $status = (($chr >= 128) AND ($chr <= 255));
         break;
       }
-      case ENC_ASCII_NUM: { // ASCII digits
+      case ENC_ASCII_NUM:
+      { // ASCII digits
         $status = (($chr >= 48) AND ($chr <= 57));
         break;
       }
@@ -512,7 +540,7 @@ class Datamatrix
    * The look-ahead test scans the data to be encoded to find the best mode (Annex P - steps from J to S).
    *
    * @param $data (string) data to encode
-   * @param $pos (int) current position
+   * @param $pos  (int) current position
    * @param $mode (int) current encoding mode
    *
    * @return int encoding mode
@@ -653,27 +681,33 @@ class Datamatrix
   protected function getSwitchEncodingCodeword($mode)
   {
     switch ($mode) {
-      case ENC_ASCII: { // ASCII character 0 to 127
+      case ENC_ASCII:
+      { // ASCII character 0 to 127
         $cw = 254;
         break;
       }
-      case ENC_C40: { // Upper-case alphanumeric
+      case ENC_C40:
+      { // Upper-case alphanumeric
         $cw = 230;
         break;
       }
-      case ENC_TXT: { // Lower-case alphanumeric
+      case ENC_TXT:
+      { // Lower-case alphanumeric
         $cw = 239;
         break;
       }
-      case ENC_X12: { // ANSI X12
+      case ENC_X12:
+      { // ANSI X12
         $cw = 238;
         break;
       }
-      case ENC_EDF: { // ASCII character 32 to 94
+      case ENC_EDF:
+      { // ASCII character 32 to 94
         $cw = 240;
         break;
       }
-      case ENC_BASE256: { // Function character (FNC1, Structured Append, Reader Program, or Code Page)
+      case ENC_BASE256:
+      { // Function character (FNC1, Structured Append, Reader Program, or Code Page)
         $cw = 231;
         break;
       }
@@ -717,7 +751,8 @@ class Datamatrix
     $data_lenght = strlen($data); // number of chars
     while ($pos < $data_lenght) {
       switch ($enc) {
-        case ENC_ASCII: { // STEP B. While in ASCII encodation
+        case ENC_ASCII:
+        { // STEP B. While in ASCII encodation
           if (($data_lenght > 1) AND ($pos < ($data_lenght - 1)) AND ($this->isCharMode(ord($data[$pos]), ENC_ASCII_NUM) AND $this->isCharMode(ord($data[$pos + 1]), ENC_ASCII_NUM))) {
             // 1. If the next data sequence is at least 2 consecutive digits, encode the next two digits as a double digit in ASCII mode.
             $cw[] = (intval(substr($data, $pos, 2)) + 130);
@@ -751,7 +786,8 @@ class Datamatrix
         }
         case ENC_C40 : // Upper-case alphanumeric
         case ENC_TXT : // Lower-case alphanumeric
-        case ENC_X12 : { // ANSI X12
+        case ENC_X12 :
+        { // ANSI X12
           $temp_cw = array();
           $p = 0;
           $epos = $pos;
@@ -854,7 +890,8 @@ class Datamatrix
           }
           break;
         }
-        case ENC_EDF: { // F. While in EDIFACT (EDF) encodation
+        case ENC_EDF:
+        { // F. While in EDIFACT (EDF) encodation
           // initialize temporary array with 0 lenght
           $temp_cw = array();
           $epos = $pos;
@@ -906,7 +943,8 @@ class Datamatrix
           } while ($epos < $data_lenght);
           break;
         }
-        case ENC_BASE256: { // G. While in Base 256 (B256) encodation
+        case ENC_BASE256:
+        { // G. While in Base 256 (B256) encodation
           // initialize temporary array with 0 lenght
           $temp_cw = array();
           $field_lenght = 0;
@@ -957,10 +995,10 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $row (int) Row number.
-   * @param $col (int) Column number.
-   * @param $chr (int) Char byte.
-   * @param $bit (int) Bit.
+   * @param $row  (int) Row number.
+   * @param $col  (int) Column number.
+   * @param $chr  (int) Char byte.
+   * @param $bit  (int) Bit.
    *
    * @return array
    * @protected
@@ -986,9 +1024,9 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $row (int) Row number.
-   * @param $col (int) Column number.
-   * @param $chr (int) Char byte.
+   * @param $row  (int) Row number.
+   * @param $col  (int) Column number.
+   * @param $chr  (int) Char byte.
    *
    * @return array
    * @protected
@@ -1013,7 +1051,7 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $chr (int) Char byte.
+   * @param $chr  (int) Char byte.
    *
    * @return array
    * @protected
@@ -1038,7 +1076,7 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $chr (int) Char byte.
+   * @param $chr  (int) Char byte.
    *
    * @return array
    * @protected
@@ -1063,7 +1101,7 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $chr (int) Char byte.
+   * @param $chr  (int) Char byte.
    *
    * @return array
    * @protected
@@ -1088,7 +1126,7 @@ class Datamatrix
    * @param $marr (array) Array of symbols.
    * @param $nrow (int) Number of rows.
    * @param $ncol (int) Number of columns.
-   * @param $chr (int) Char byte.
+   * @param $chr  (int) Char byte.
    *
    * @return array
    * @protected
@@ -1173,6 +1211,7 @@ class Datamatrix
     }
     return $marr;
   }
+
 }
 
 // end DataMatrix class

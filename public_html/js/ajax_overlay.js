@@ -30,5 +30,5 @@ $(document).ready(function () {
     $ajax_overlay.css("height", "150px");
     $ajax_overlay.dialog("close");
   });
-  $(".topnav li").eq(3).after("<li><a target=\"_blank\" href=\"http://tceu-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?vid=48WAT_VIEW\" id=\"menu-0\">Złóż nowe zamówienia</a></li>");
+  $(".topnav li").eq(3).after("<li><a target=\"_blank\" href=\"http://primo-48tuw.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?vid=48TUW_VIEW\" id=\"menu-0\">Złóż nowe zamówienia</a></li>");
 });

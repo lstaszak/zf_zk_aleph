@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : htmlcolors.php
 // Version     : 1.0.008
@@ -30,6 +31,7 @@
 // Description : Array of WEB safe colors
 //
 //============================================================+
+
 /**
  * @file
  * Array of WEB safe colors

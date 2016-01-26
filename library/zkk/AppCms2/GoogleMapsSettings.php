@@ -2,6 +2,7 @@
 
 class AppCms2_GoogleMapsSettings
 {
+
   private $_oAuth, $_nUserId = null;
 
   public function __construct()
@@ -59,6 +60,7 @@ class AppCms2_GoogleMapsSettings
     $oModelGoogleMaps = new Admin_Model_GoogleMapsMarker();
     return $oModelGoogleMaps->deleteRow($nId);
   }
+
 }
 
 ?>

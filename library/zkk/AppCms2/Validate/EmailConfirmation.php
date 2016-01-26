@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_EmailConfirmation extends Zend_Validate_Abstract
 {
+
   const NOT_MATCH = "notMatch";
+
   protected $_messageTemplates = array(
     self::NOT_MATCH => "Adresy e-mail są różne"
   );
@@ -22,4 +24,5 @@ class AppCms2_Validate_EmailConfirmation extends Zend_Validate_Abstract
       return false;
     }
   }
+
 }

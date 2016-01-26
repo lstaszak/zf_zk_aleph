@@ -19,9 +19,11 @@ $cidinfo = array(
   'Supplement' => '4',
 );
 $enc = 'UniJIS-UCS2-H';
+
 // underline position, needs checking:
 $up = -75;
 $ut = 50;
+
 $dw = 1000;
 $cw = array(
   32 => 224, 33 => 266, 34 => 392, 35 => 551, 36 => 562, 37 => 883, 38 => 677, 39 => 213, 40 => 322, 41 => 322,

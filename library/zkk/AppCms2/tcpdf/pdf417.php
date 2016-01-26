@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : pdf417.php
 // Version     : 1.0.003
@@ -42,6 +43,7 @@
 //		Maximum Data Characters:     1850 text, 2710 digits, 1108 bytes
 //
 //============================================================+
+
 /**
  * @file
  * Class to create PDF417 barcode arrays for TCPDF class.
@@ -53,25 +55,31 @@
  */
 // definitions
 if (!defined('PDF417DEFS')) {
+
   /**
    * Indicate that definitions for this class are set
    */
   define('PDF417DEFS', true);
+
   // -----------------------------------------------------
+
   /**
    * Row height respect X dimension of single module
    */
   define('ROWHEIGHT', 4);
+
   /**
    * Horizontal quiet zone in modules
    */
   define('QUIETH', 2);
+
   /**
    * Vertical quiet zone in modules
    */
   define('QUIETV', 2);
 } // end of definitions
 // #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+
 /**
  * @class   PDF417
  * Class to create PDF417 barcode arrays for TCPDF class.
@@ -82,21 +90,25 @@ if (!defined('PDF417DEFS')) {
  */
 class PDF417
 {
+
   /**
    * Barcode array to be returned which is readable by TCPDF.
    * @protected
    */
   protected $barcode_array = array();
+
   /**
    * Start pattern.
    * @protected
    */
   protected $start_pattern = '11111111010101000';
+
   /**
    * Stop pattern.
    * @protected
    */
   protected $stop_pattern = '111111101000101001';
+
   /**
    * Array of text Compaction Sub-Modes (values 0xFB - 0xFF are used for submode changers).
    * @protected
@@ -107,6 +119,7 @@ class PDF417
     array(0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x26, 0x0d, 0x09, 0x2c, 0x3a, 0x23, 0x2d, 0x2e, 0x24, 0x2f, 0x2b, 0x25, 0x2a, 0x3d, 0x5e, 0xFB, 0x20, 0xFD, 0xFE, 0xFF), // Mixed
     array(0x3b, 0x3c, 0x3e, 0x40, 0x5b, 0x5c, 0x5d, 0x5f, 0x60, 0x7e, 0x21, 0x0d, 0x09, 0x2c, 0x3a, 0x0a, 0x2d, 0x2e, 0x24, 0x2f, 0x22, 0x7c, 0x2a, 0x28, 0x29, 0x3f, 0x7b, 0x7d, 0x27, 0xFF) // Puntuaction
   );
+
   /**
    * Array of switching codes for Text Compaction Sub-Modes.
    * @protected
@@ -117,6 +130,7 @@ class PDF417
     '20' => array(28), '21' => array(27), '23' => array(25), //
     '30' => array(29), '31' => array(29, 27), '32' => array(29, 28) //
   );
+
   /**
    * Clusters of codewords (0, 3, 6)<br/>
    * Values are hex equivalents of binary representation of bars (1 = bar, 0 = space).<br/>
@@ -422,6 +436,7 @@ class PDF417
       0x19f9a, 0x10f0a, 0x11f1a, 0x13f3a, 0x103ac, 0x103a6, 0x107a8, 0x183d6, 0x107a4, 0x107a2, // 920
       0x10396, 0x107b6, 0x187d4, 0x187d2, 0x10794, 0x10fb4, 0x10792, 0x10fb2, 0x1c7ea) // 929
   ); // end of $clusters array
+
   /**
    * Array of factors of the Reed-Solomon polynomial equations used for error correction; one sub array for each correction level (0-8).
    * @protected
@@ -508,10 +523,10 @@ class PDF417
    * This is the class constructor.
    * Creates a PDF417 object
    *
-   * @param $code (string) code to represent using PDF417
-   * @param $ecl (int) error correction level (0-8); default -1 = automatic correction level
+   * @param $code        (string) code to represent using PDF417
+   * @param $ecl         (int) error correction level (0-8); default -1 = automatic correction level
    * @param $aspectratio (float) the width to height of the symbol (excluding quiet zones)
-   * @param $macro (array) information for macro block
+   * @param $macro       (array) information for macro block
    *
    * @public
    */
@@ -652,15 +667,18 @@ class PDF417
       // row start code
       $row = $pstart;
       switch ($cid) {
-        case 0: {
+        case 0:
+        {
           $L = ((30 * intval($r / 3)) + intval(($rows - 1) / 3));
           break;
         }
-        case 1: {
+        case 1:
+        {
           $L = ((30 * intval($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
           break;
         }
-        case 2: {
+        case 2:
+        {
           $L = ((30 * intval($r / 3)) + ($cols - 1));
           break;
         }
@@ -673,15 +691,18 @@ class PDF417
         ++$k;
       }
       switch ($cid) {
-        case 0: {
+        case 0:
+        {
           $L = ((30 * intval($r / 3)) + ($cols - 1));
           break;
         }
-        case 1: {
+        case 1:
+        {
           $L = ((30 * intval($r / 3)) + intval(($rows - 1) / 3));
           break;
         }
-        case 2: {
+        case 2:
+        {
           $L = ((30 * intval($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
           break;
         }
@@ -723,7 +744,7 @@ class PDF417
   /**
    * Returns the error correction level (0-8) to be used
    *
-   * @param $ecl (int) error correction level
+   * @param $ecl   (int) error correction level
    * @param $numcw (int) number of data codewords
    *
    * @return int error correction level
@@ -764,7 +785,7 @@ class PDF417
   /**
    * Returns the error correction codewords
    *
-   * @param $cw (array) array of codewords including Symbol Lenght Descriptor and pad
+   * @param $cw  (array) array of codewords including Symbol Lenght Descriptor and pad
    * @param $ecl (int) error correction level 0-8
    *
    * @return array of error correction codewords
@@ -862,8 +883,8 @@ class PDF417
   /**
    * Compact data by mode.
    *
-   * @param $mode (int) compaction mode number
-   * @param $code (string) data to compact
+   * @param $mode    (int) compaction mode number
+   * @param $code    (string) data to compact
    * @param $addmode (boolean) if true add the mode codeword at first position
    *
    * @return array of codewords
@@ -873,7 +894,8 @@ class PDF417
   {
     $cw = array(); // array of codewords to return
     switch ($mode) {
-      case 900: { // Text Compaction mode latch
+      case 900:
+      { // Text Compaction mode latch
         $submode = 0; // default Alpha sub-mode
         $txtarr = array(); // array of characters and sub-mode switching characters
         $codelen = strlen($code);
@@ -923,7 +945,8 @@ class PDF417
         break;
       }
       case 901:
-      case 924: { // Byte Compaction mode latch
+      case 924:
+      { // Byte Compaction mode latch
         while (($codelen = strlen($code)) > 0) {
           if ($codelen > 6) {
             $rest = substr($code, 6);
@@ -954,7 +977,8 @@ class PDF417
         }
         break;
       }
-      case 902: { // Numeric Compaction mode latch
+      case 902:
+      { // Numeric Compaction mode latch
         while (($codelen = strlen($code)) > 0) {
           if ($codelen > 44) {
             $rest = substr($code, 44);
@@ -972,7 +996,8 @@ class PDF417
         }
         break;
       }
-      case 913: { // Byte Compaction mode shift
+      case 913:
+      { // Byte Compaction mode shift
         $cw[] = ord($code);
         break;
       }
@@ -983,9 +1008,11 @@ class PDF417
     }
     return $cw;
   }
+
 }
 
 // end PDF417 class
+
 //============================================================+
 // END OF FILE
 //============================================================+

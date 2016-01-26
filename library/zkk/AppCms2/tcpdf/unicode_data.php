@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : unicode_data.php
 // Version     : 1.0.009
@@ -33,6 +34,7 @@
 // THANKS TO
 // Efthimios Mavrogeorgiadis
 // Saleh AlMatrafe
+
 /**
  * @file
  * Unicode data class for TCPDF library.
@@ -50,41 +52,49 @@
  */
 class TCPDF_UNICODE_DATA
 {
+
   /**
    * Unicode code for Left-to-Right Mark.
    * @public
    */
   public $uni_LRM = 8206;
+
   /**
    * Unicode code for Right-to-Left Mark.
    * @public
    */
   public $uni_RLM = 8207;
+
   /**
    * Unicode code for Left-to-Right Embedding.
    * @public
    */
   public $uni_LRE = 8234;
+
   /**
    * Unicode code for Right-to-Left Embedding.
    * @public
    */
   public $uni_RLE = 8235;
+
   /**
    * Unicode code for Pop Directional Format.
    * @public
    */
   public $uni_PDF = 8236;
+
   /**
    * Unicode code for Left-to-Right Override.
    * @public
    */
   public $uni_LRO = 8237;
+
   /**
    * Unicode code for Right-to-Left Override.
    * @public
    */
   public $uni_RLO = 8238;
+
   /**
    * Pattern to test RTL (Righ-To-Left) strings using regular expressions.
    * @public
@@ -102,6 +112,7 @@ class TCPDF_UNICODE_DATA
 	| \xF0\x90\xA9[\x80-\x87\x90-\x98]                     # R
 	| \xE2\x80[\xAB\xAE]                                   # RLE & RLO
 	)/x";
+
   /**
    * Pattern to test Arabic strings using regular expressions. Source: http://www.w3.org/International/questions/qa-forms-utf-8
    * @public
@@ -127,6 +138,7 @@ class TCPDF_UNICODE_DATA
 		| \xEF\xBB[\x80-\xBC]                           # AL
 		| \xD9[\xA0-\xA9\xAB\xAC]                       # AN
 		)/x";
+
   /**
    * Array of Unicode types.
    * @public
@@ -17853,6 +17865,7 @@ class TCPDF_UNICODE_DATA
     1048576 => 'L',
     1114109 => 'L'
   );
+
   /**
    * Mirror unicode characters. For information on bidi mirroring, see UAX #9: Bidirectional Algorithm, at http://www.unicode.org/unicode/reports/tr9/
    * @public
@@ -18210,6 +18223,7 @@ class TCPDF_UNICODE_DATA
     0xFF60 => 0xFF5F,
     0xFF62 => 0xFF63,
     0xFF63 => 0xFF62);
+
   /**
    * Arabic shape substitutions: char code => (isolated, final, initial, medial).
    * @public
@@ -18292,6 +18306,7 @@ class TCPDF_UNICODE_DATA
     1746 => array(64430, 64431),
     1747 => array(64432, 64433)
   );
+
   /**
    * Arabic laa letter: (char code => isolated, final, initial, medial).
    * @public
@@ -18302,6 +18317,7 @@ class TCPDF_UNICODE_DATA
     1573 => array(65273, 65274, 65273, 65274),
     1575 => array(65275, 65276, 65275, 65276)
   );
+
   /**
    * Array of character substitutions for sequences of two diacritics symbols.
    * Putting the combining mark and character in the same glyph allows us to avoid the two marks overlapping each other in an illegible manner.
@@ -18315,6 +18331,7 @@ class TCPDF_UNICODE_DATA
     1615 => 64609, # Shadda + Damma
     1616 => 64610 # Shadda + Kasra
   );
+
   /**
    * Array of character substitutions from UTF-8 Unicode to Latin1.
    * @public
@@ -18348,9 +18365,11 @@ class TCPDF_UNICODE_DATA
     8482 => 153, # trademark
     382 => 158 # zcaron2
   );
+
 }
 
 // --- END OF CLASS ---
+
 //============================================================+
 // END OF FILE
 //============================================================+

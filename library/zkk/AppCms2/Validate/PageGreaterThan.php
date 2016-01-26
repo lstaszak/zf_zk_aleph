@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_PageGreaterThan extends Zend_Validate_Abstract
 {
+
   const IS_EXIST = "notMatch";
+
   protected $_messageTemplates = array(
     self::IS_EXIST => "Podana wartość powinna być większa lub równa wartości w polu 'Strona od'"
   );
@@ -20,4 +22,5 @@ class AppCms2_Validate_PageGreaterThan extends Zend_Validate_Abstract
       return false;
     }
   }
+
 }

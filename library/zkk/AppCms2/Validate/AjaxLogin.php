@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_AjaxLogin extends Zend_Validate_Abstract
 {
+
   const NOT_MATCH = "notMatch";
+
   protected $_messageTemplates = array(
     self::NOT_MATCH => "Nieprawidłowa nazwa użytkownika lub hasło"
   );
@@ -23,4 +25,5 @@ class AppCms2_Validate_AjaxLogin extends Zend_Validate_Abstract
     }
     return true;
   }
+
 }

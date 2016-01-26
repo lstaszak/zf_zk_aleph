@@ -618,11 +618,11 @@ var table_order_user = {
         "background-color": "#1d2e3f"
       }).find("p").css({
         "font-weight": "bold",
-        "color": "#454255"
+        "color": "#9b2708"
       }).find("span").css({
         "font-weight": "bold",
         "font-style": "italic",
-        "color": "#454255"
+        "color": "#9b2708"
       });
       $("#payment_button").css({
         "text-align": "left"

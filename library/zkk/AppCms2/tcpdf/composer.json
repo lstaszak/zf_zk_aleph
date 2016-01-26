@@ -4,15 +4,7 @@
   "homepage": "http://www.tcpdf.org/",
   "type": "library",
   "description": "TCPDF is a PHP class for generating PDF documents.",
-  "keywords": [
-    "pdf",
-    "tcpdf",
-    "PDFD32000-2008",
-    "qrcode",
-    "datamatrix",
-    "pdf417",
-    "barcodes"
-  ],
+  "keywords": ["pdf", "tcpdf", "PDFD32000-2008", "qrcode", "datamatrix", "pdf417", "barcodes"],
   "license": "LGPLv3",
   "authors": [
     {

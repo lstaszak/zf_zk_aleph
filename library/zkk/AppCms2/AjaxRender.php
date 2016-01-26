@@ -2,6 +2,7 @@
 
 class AppCms2_AjaxRender
 {
+
   private $_oAuth, $_nUserId, $_sRoleName = null;
 
   public function __construct()
@@ -43,6 +44,7 @@ class AppCms2_AjaxRender
     }
     return null;
   }
+
 }
 
 ?>

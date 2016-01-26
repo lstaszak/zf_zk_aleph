@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : spotcolors.php
 // Version     : 1.0.001
@@ -30,6 +31,7 @@
 // Description : Array of Spot Colors for TCPDF library
 //
 //============================================================+
+
 /**
  * @file
  * Arrays of Spot Colors for TCPDF library

@@ -18,9 +18,11 @@ $cidinfo = array(
   'Supplement' => '2',
 );
 $enc = 'UniGB-UCS2-H';
+
 // underline position, needs checking:
 $up = -130;
 $ut = 40;
+
 $dw = 1000;
 $cw = array(
   32 => 207, 33 => 270, 34 => 342, 35 => 467, 36 => 462, 37 => 797, 38 => 710, 39 => 239, 40 => 374, 41 => 374,

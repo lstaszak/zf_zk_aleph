@@ -13,6 +13,7 @@
 
 class AppCms2_UploadHandler
 {
+
   protected $options;
   protected $error_messages = array(
     1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
@@ -724,4 +725,5 @@ class AppCms2_UploadHandler
     else
       return false;
   }
+
 }

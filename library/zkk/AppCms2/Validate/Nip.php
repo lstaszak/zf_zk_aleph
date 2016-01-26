@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -31,8 +32,10 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class AppCms2_Validate_Nip extends Zend_Validate_Abstract
 {
+
   const LENGTH = 'numLength';
   const CHECKSUM = 'numChecksum';
+
   protected static $_filter = null;
   protected $_messageTemplates = array(
     self::LENGTH => "'%value%' must contain 10 digits",
@@ -68,6 +71,7 @@ class AppCms2_Validate_Nip extends Zend_Validate_Abstract
     }
     return true;
   }
+
 }
 
 ?>

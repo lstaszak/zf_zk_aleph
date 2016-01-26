@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_BBarcode extends Zend_Validate_Abstract
 {
+
   const NOT_MATCH = "notMatch";
+
   protected $_messageTemplates = array(
     self::NOT_MATCH => "Nie znaleziono czytelnika o tym numerze karty bibliotecznej"
   );
@@ -29,4 +31,5 @@ class AppCms2_Validate_BBarcode extends Zend_Validate_Abstract
       return false;
     }
   }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : encodings_maps.php
 // Version     : 1.0.001
@@ -30,6 +31,7 @@
 // Description : Unicode data for TCPDF library.
 //
 //============================================================+
+
 /**
  * @file
  * Font encodings maps class for TCPDF library.
@@ -47,6 +49,7 @@
  */
 class TCPDF_ENCODING_MAPS
 {
+
   /**
    * Array of Encoding Maps.
    * @public
@@ -813,9 +816,11 @@ class TCPDF_ENCODING_MAPS
       248 => 'parenrightbt', 249 => 'bracketrighttp', 250 => 'bracketrightex', 251 => 'bracketrightbt', 252 => 'bracerighttp', 253 => 'bracerightmid', 254 => 'bracerightbt', 255 => '.notdef',
       1226 => 'registered', 1227 => 'copyright', 1228 => 'trademark')
   ); // end of encoding maps
+
 }
 
 // --- END OF CLASS ---
+
 //============================================================+
 // END OF FILE
 //============================================================+

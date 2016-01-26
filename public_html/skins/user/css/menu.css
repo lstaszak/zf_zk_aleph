@@ -24,7 +24,7 @@ ul.topnav li a {
 }
 ul.topnav li a:hover, ul.topnav li.active a {
   color:#ffffff;
-  background-color:#454255;
+  background-color:#9b2708;
   -webkit-border-radius:5px;
   -moz-border-radius:5px;
   border-radius:5px;
@@ -65,7 +65,7 @@ ul.subnav li a {
   font-weight:normal;
 }
 ul.subnav li a:hover, ul.subnav li.active a {
-  background-color:#454255;
+  background-color:#9b2708;
   color:#ffffff;
   -webkit-border-radius:5px;
   -moz-border-radius:5px;

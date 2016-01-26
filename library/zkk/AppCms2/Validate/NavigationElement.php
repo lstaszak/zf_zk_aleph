@@ -2,7 +2,9 @@
 
 class AppCms2_Validate_NavigationElement extends Zend_Validate_Abstract
 {
+
   const IS_EXIST = "notMatch";
+
   protected $_messageTemplates = array(
     self::IS_EXIST => "Element o takiej wartości już istnieje"
   );
@@ -34,12 +36,15 @@ class AppCms2_Validate_NavigationElement extends Zend_Validate_Abstract
             $oModelNavigationElement = $oModelNavigationPrivilege;
             break;
         }
+
         $nElementId = $oModelNavigationElement->check($sValue);
         if (!is_numeric($nElementId))
           return true;
       }
     }
+
     $this->_error(self::IS_EXIST);
     return false;
   }
+
 }

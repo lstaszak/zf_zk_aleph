@@ -2,6 +2,7 @@
 
 class AppCms2_ImageSettings
 {
+
   private $_oAuth, $_nUserId = null;
 
   public function __construct()
@@ -41,6 +42,7 @@ class AppCms2_ImageSettings
     }
     return null;
   }
+
 }
 
 ?>
